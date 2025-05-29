@@ -1,6 +1,7 @@
 import React from "react";
-import { SafeAreaView, TextInput, View } from "react-native";
+import { SafeAreaView, TextInput, TouchableOpacity, View } from "react-native";
 import { SText } from "./index";
+import { setOnboardingDetails } from "@/lib/actions";
 
 const QuestionComp = ({
   question,
@@ -26,12 +27,23 @@ const onboarding = () => {
     { text: "Disease", type: "List" },
     { text: "Condition", type: "List" },
   ];
+  async function handlePress() {
+    await setOnboardingDetails()
+  }
   return (
     <SafeAreaView className="flex-1 bg-gray-200 p-3 pt-10 gap-4">
-        <SText className="text-black text-xl font-bold my-4">Please fill your details</SText>
+      <SText className="text-black text-xl font-bold my-4">
+        Please fill your details
+      </SText>
       {questions.map((question) => (
         <QuestionComp question={question} />
       ))}
+      <TouchableOpacity
+        onPress={handlePress}
+        className="bg-blue-400 text-center h-8 justify-center"
+      >
+        Log in
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
