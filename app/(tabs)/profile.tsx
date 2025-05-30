@@ -7,7 +7,7 @@ const Styles = StyleSheet.create({
   container :{
     alignContent : 'flex-start',
     margin : 37,
-    width :500,
+    width :350,
     height : 200
   }
 })
