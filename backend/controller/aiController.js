@@ -13,11 +13,11 @@ User profile:
 Product data:
 ${JSON.stringify(productData, null, 2)}
 
-Summarize if this product is safe or risky. Be brief but clear.
+Summarize if this product is safe or risky. Be brief but clear. maximum of 100 words.
 `;
 
   const result = await groq.chat.completions.create({
-    model: "deepseek-r1-distill-llama-70b",
+    model: "llama-3.1-8b-instant",
     messages: [
       {
         role: "system",
