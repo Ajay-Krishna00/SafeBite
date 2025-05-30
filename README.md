@@ -22,12 +22,14 @@ In today’s fast-paced world, ensuring food safety is challenging for both **co
 SafeBite solves this dual-sided problem by providing:
 
 ### 🔹 For Consumers:
+
 - Barcode/QR scanning to instantly detect harmful ingredients.
 - Personalized warnings based on the user’s health profile.
 - Expiry notifications and safe product suggestions.
 - Recipe ideas based on purchased items.
 
 ### 🔹 For Shopkeepers:
+
 - Track product expiry using barcodes.
 - Get alerts before expiry to reduce wastage.
 - View customer trends for smarter restocking.
@@ -37,13 +39,15 @@ SafeBite solves this dual-sided problem by providing:
 ## ✨ Features
 
 ### 📱 Mobile App Features
+
 - **QR/Barcode Scanner**: Scan food products instantly.
 - **Health Profile Setup**: Add allergies, conditions, and diet.
 - **Harmful Ingredient Detection**: Smart alerts based on profile.
 - **Expiry Tracking**: Alerts for both consumers and sellers.
 - **Recipe Generator**: Suggests meals using scanned items.
 
-### 📊 Shopkeeper Dashboard *(Web coming soon!)*
+### 📊 Shopkeeper Dashboard _(Web coming soon!)_
+
 - Scan at billing → auto-saves product to customer profile.
 - Track most/least selling items.
 - Get insights into inventory and expiry trends.
@@ -52,11 +56,11 @@ SafeBite solves this dual-sided problem by providing:
 
 ## 🧠 Tech Stack
 
-| Frontend                | Backend                | Tools/Infra           |
-|-------------------------|------------------------|------------------------|
-| React Native (Expo)     | Node.js + Express.js   | Render (Backend Hosting) |
-| NativeWind (Tailwind)   | REST API Architecture  | Supabase (User/Auth DB) |
-| Expo Camera             | dotenv, cors           | Open Food Facts API    |
+| Frontend              | Backend               | Tools/Infra              |
+| --------------------- | --------------------- | ------------------------ |
+| React Native (Expo)   | Node.js + Express.js  | Render (Backend Hosting) |
+| NativeWind (Tailwind) | REST API Architecture | Supabase (User/Auth DB)  |
+| Expo Camera           | dotenv, cors          | Open Food Facts API      |
 
 ---
 
@@ -73,8 +77,8 @@ SafeBite solves this dual-sided problem by providing:
 
 ## 🖼️ Screenshots
 
-| Home Page          | Scanner             | Scan Result           | Profile Setup         |
-|--------------------|---------------------|------------------------|------------------------|
+| Home Page            | Scanner              | Scan Result                 | Profile Setup           |
+| -------------------- | -------------------- | --------------------------- | ----------------------- |
 | ![](assets/home.png) | ![](assets/scan.png) | ![](assets/scan-result.png) | ![](assets/profile.png) |
 
 ---
@@ -83,7 +87,7 @@ SafeBite solves this dual-sided problem by providing:
 
 SafeBite/
 ├── app/
-│ ├── _layout.jsx
+│ ├── \_layout.jsx
 │ ├── index.jsx
 │ ├── global.css
 │ ├── (auth)/login.jsx
@@ -106,26 +110,33 @@ SafeBite/
 ## 📦 How to Run Locally
 
 ### 1. Clone the repo
+
 ```bash
 git clone https://github.com/Ajay-Krishna00/SafeBite
 cd SafeBite
 ```
+
 ### 2. Setup Mobile Frontend (Expo)
+
 ```bash
 npm install
 npx expo start
 ```
+
 ### 3. Setup Backend API
+
 ```bash
 cd backend
 npm install
 node server.js
 ```
+
 Or deploy your backend to Render and replace the API URL.
 
 ---
 
 ## 🎯 Target Users
+
 - Individuals with allergies or chronic conditions
 
 - Parents shopping for children
@@ -135,6 +146,7 @@ Or deploy your backend to Render and replace the API URL.
 - Shopkeepers wanting smarter stock control
 
 ## 🌍 Market Opportunity
+
 - 🚨 Rising food-related illnesses and allergies
 
 - 📱 Growing demand for food transparency
@@ -152,6 +164,7 @@ Or deploy your backend to Render and replace the API URL.
 - Authentication powered by Supabase
 
 ## 📈 Scalability Roadmap
+
 - 🛍️ Shopkeeper Web Portal
 
 - 🧠 AI-powered ingredient classification
@@ -167,6 +180,7 @@ Or deploy your backend to Render and replace the API URL.
 ---
 
 ## 👥 Team - Code Blooded
+
 - Ajay Krishna D
 - Abhay Murali M
 - Thaariq Hassan R
@@ -174,6 +188,7 @@ Or deploy your backend to Render and replace the API URL.
 ---
 
 ## 🧾 License
+
 MIT License — free for personal and educational use.
 
 ---
