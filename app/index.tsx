@@ -6,7 +6,7 @@ import { supabase } from "@/lib/supabase";
 
 export default function Index() {
   const router = useRouter();
-  // const isLoggedIn = false;
+  const isLoggedIn = true;
   useEffect(() => {
     const checkUser = async () => {
       const { data: user } = await supabase.auth.getUser();

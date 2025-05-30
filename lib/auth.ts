@@ -14,14 +14,12 @@ export const signUp = async (
   if (error) {
     return { error };
   } else {
-    const { error } = await supabase
-      .from("Users")
-      .insert({
-        id: data.user?.id,
-        username: username,
-        email: email,
-        isShopkeeper: isShopkeeper,
-      });
+    const { error } = await supabase.from("Users").insert({
+      id: data.user?.id,
+      username: username,
+      email: email,
+      isShopkeeper: isShopkeeper,
+    });
     if (error) {
       return { error };
     } else {

@@ -36,6 +36,7 @@ const ProductSummary = () => {
   const [imgLoading, setImgLoading] = useState<boolean>(true);
   const [summData, setSummData] = useState<ProductData>();
   const [summaryData, setSummaryData] = useState<string | null>(null);
+  const [summaryLoading, setSummaryLoading] = useState<boolean>(true);
 
   const navigation = useNavigation();
   useEffect(() => {
@@ -69,7 +70,7 @@ const ProductSummary = () => {
               (data.product?.selected_images?.front?.display?.default ||
                 data.product?.image_url ||
                 "https://placehold.co/360x260?text=No+Image&font=roboto"),
-            );
+          );
         } else {
           setNotFound(true);
         }
@@ -83,14 +84,15 @@ const ProductSummary = () => {
       }
     };
     fetchData();
-    
   }, [id]);
 
   useEffect(() => {
     const fetchSummary = async () => {
+      setSummaryLoading(true);
       if (summData) {
         const summary = await handleSummary(summData);
         setSummaryData(summary?.summary || null);
+        setSummaryLoading(false);
       }
     };
     fetchSummary();
@@ -164,7 +166,6 @@ const ProductSummary = () => {
                 Nova {productData.nova_group || "N/A"}
               </Text>
             </Text>
-
             {/* Allergens */}
             <Text className="text-md font-semibold text-red-600 mb-3">
               ⚠️ Allergens:
@@ -190,7 +191,6 @@ const ProductSummary = () => {
             <Text className="text-md text-gray-700 mb-3">
               {productData.ingredients_text || "Not available"}
             </Text>
-
             {/* Nutritional Info */}
             <Text className="text-md font-semibold text-purple-700 mb-1">
               📊 Nutritional Info (per 100g):
@@ -213,7 +213,6 @@ const ProductSummary = () => {
                 Protein: {productData.nutriments?.["proteins_100g"] || "N/A"} g
               </Text>
             </View>
-
             {/* Labels */}
             <Text className="text-md font-semibold text-blue-700 mt-4 mb-1">
               🏷️ Labels:
@@ -225,7 +224,6 @@ const ProductSummary = () => {
                     .join(", ")
                 : "None"}
             </Text>
-
             {/* Expiry Date */}
             <Text className="text-md font-semibold text-orange-600 mt-4 mb-1">
               ⏳ Expiry Date:
@@ -233,16 +231,24 @@ const ProductSummary = () => {
             <Text className="text-gray-700">
               {productData.expiration_date || "Not available"}
             </Text>
-
+            :
             <View className="mt-5">
               <Text className="text-lg font-semibold text-gray-800 mb-2">
                 AI Summary
-                  </Text>
-                  <Text className="text-gray-700">
-                    {summaryData || "No summary available for this product."}
-                    </Text>
+              </Text>
+              <Text className="text-gray-700">
+                {summaryLoading ? (
+                  <View>
+                    <ActivityIndicator
+                      size="large"
+                      color="black"
+                    />
+                  </View>
+                ) : (
+                  summaryData || "No summary available for this product."
+                )}
+              </Text>
             </View>
-
             <TouchableOpacity
               className=" bg-green-600 p-3 rounded-lg mb-20 mt-4"
               onPress={() => navigation.goBack()}

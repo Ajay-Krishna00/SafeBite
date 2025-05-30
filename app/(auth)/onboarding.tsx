@@ -13,7 +13,7 @@ import { SText } from "./login";
 const lists = (
   Arr: string[],
   selected: string[],
-  setSelected: React.Dispatch<React.SetStateAction<string[]>>
+  setSelected: React.Dispatch<React.SetStateAction<string[]>>,
 ) => {
   return Arr.map((e) => (
     <TouchableOpacity
@@ -33,7 +33,7 @@ const lists = (
 const singleAnswer = (
   e: string,
   selected: string | undefined,
-  setSelected: React.Dispatch<React.SetStateAction<string | undefined>>
+  setSelected: React.Dispatch<React.SetStateAction<string | undefined>>,
 ) => {
   return (
     <TouchableOpacity
@@ -54,7 +54,7 @@ const singleAnswer = (
 const toggleElement = (
   element: string,
   selected: string[],
-  setSelected: React.Dispatch<React.SetStateAction<string[]>>
+  setSelected: React.Dispatch<React.SetStateAction<string[]>>,
 ) => {
   if (selected.includes(element)) {
     setSelected(selected.filter((e) => e !== element));
@@ -65,7 +65,7 @@ const toggleElement = (
 const selectElement = (
   element: string,
   selected: string | undefined,
-  setSelected: React.Dispatch<React.SetStateAction<string | undefined>>
+  setSelected: React.Dispatch<React.SetStateAction<string | undefined>>,
 ) => {
   if (selected === element) {
     setSelected(undefined);

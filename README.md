@@ -23,10 +23,12 @@ SafeBite solves this dual-sided problem by providing:
 
 ### 🔹 For Consumers:
 
-- Barcode/QR scanning to instantly detect harmful ingredients.
-- Personalized warnings based on the user’s health profile.
-- Expiry notifications and safe product suggestions.
-- Recipe ideas based on purchased items.
+- 📷 Instant Barcode & QR Scanning.Scan any packaged food item to retrieve detailed product information in seconds.
+- 🧠 AI-Powered Ingredient Analysis.SafeBite uses AI to analyze ingredients and generate a personalized summary based on the user's allergies, medical conditions, and dietary preferences.
+- ⚠️ Smart Warnings for Harmful Substances.Automatically detects and highlights ingredients that may be harmful or incompatible with the user's health profile.
+- 👤 User Profiles with Health Preferences.Users can save their conditions (e.g., diabetes, gluten intolerance, allergies), enabling fully personalized health checks.
+
+
 
 ### 🔹 For Shopkeepers:
 
@@ -44,7 +46,7 @@ SafeBite solves this dual-sided problem by providing:
 - **Health Profile Setup**: Add allergies, conditions, and diet.
 - **Harmful Ingredient Detection**: Smart alerts based on profile.
 - **Expiry Tracking**: Alerts for both consumers and sellers.
-- **Recipe Generator**: Suggests meals using scanned items.
+- **uses AI** to analyze ingredients and generate a personalized summary based on the user's allergies, medical conditions, and dietary preferences.
 
 ### 📊 Shopkeeper Dashboard _(Web coming soon!)_
 
@@ -69,41 +71,46 @@ SafeBite solves this dual-sided problem by providing:
 1. **Barcode-Based Ingredient Parsing** (OCR / API).
 2. **Health Profile Matching** (Rule-based + future ML).
 3. **Expiry Notification System** (Time-triggered alerts).
-4. **Collaborative Filtering for Recommendations**.
-5. **Recipe Suggestions** via NLP-based ingredient matching.
-6. **Cloud-Backed Storage** using Supabase.
+4. **Collaborative Filtering** for Recommendations_
+5. **Cloud-Backed Storage** using Supabase.
 
 ---
 
 ## 🖼️ Screenshots
 
-| Home Page            | Scanner              | Scan Result                 | Profile Setup           |
-| -------------------- | -------------------- | --------------------------- | ----------------------- |
-| ![](assets/home.png) | ![](assets/scan.png) | ![](assets/scan-result.png) | ![](assets/profile.png) |
+| Home Page            | Scan Result 1      | Scan Result 2      | Profile Setup           |
+| -------------------- | ------------------ | ------------------ | ----------------------- |
+| ![](assets/home.jpg) | ![](assets/p2.png) | ![](assets/p1.png) | ![](assets/profile.png) |
 
 ---
 
-## 📂 Folder Structure
+## 📁 Project Structure
 
+```bash
 SafeBite/
 ├── app/
-│ ├── \_layout.jsx
-│ ├── index.jsx
-│ ├── global.css
-│ ├── (auth)/login.jsx
-│ ├── (auth)/signup.jsx
-│ ├── (auth)/onboarding.jsx
-│ ├── (tabs)/home.jsx
-│ ├── (tabs)/profile.jsx
-│ ├── product/[id].tsx
-│ ├── scan/index.tsx
+│   ├── _layout.jsx              # Root layout file for Expo Router
+│   ├── index.jsx                # Main entry screen
+│   ├── global.css               # Global styles
+│   ├── (auth)/
+│   │   ├── login.jsx            # Login screen
+│   │   ├── signup.jsx           # Signup screen
+│   │   └── onboarding.jsx       # Onboarding flow
+│   ├── (tabs)/
+│   │   ├── home.jsx             # Home tab screen
+│   │   └── profile.jsx          # Profile tab screen
+│   ├── product/
+│   │   └── [id].tsx             # Dynamic product detail screen
+│   └── scan/
+│       └── index.tsx            # Barcode/QR scanner screen
 ├── backend/
-│ ├── server.js
-│ ├── routes/
-├── assets/
-├── constants/
-├── components/
-├── types/
+│   ├── server.js                # Express.js server entry point
+│   └── routes/                  # Backend API routes
+├── assets/                      # Images, icons, Lottie animations, etc.
+├── constants/                   # Static values (e.g., colors, ingredient lists)
+├── components/                  # Reusable UI components
+├── types/                       # TypeScript types and interfaces
+```
 
 ---
 
@@ -176,6 +183,8 @@ Or deploy your backend to Render and replace the API URL.
 - 📅 Grocery planning assistant
 
 - 🔒 Fully GDPR-compliant data handling
+
+- 🥗 Recipe Generator
 
 ---
 

@@ -13,7 +13,7 @@ User profile:
 Product data:
 ${JSON.stringify(productData, null, 2)}
 
-Summarize if this product is safe or risky. Be brief but clear. maximum of 70 words. Don't show your thinking process, just the conclusion and if necessary your suggestions. DO NOT include any markdown formatting or code blocks in your response.
+Summarize if this product is safe or risky. Be brief but clear. maximum of 70 words. Don't show your thinking process, just the conclusion and if necessary your suggestions and advices. DO NOT include any markdown formatting or code blocks in your response. 
 `;
 
   const result = await groq.chat.completions.create({

@@ -33,5 +33,5 @@ export const setOnboardingDetails = async ({
     allergy_severity: allergy_severity,
     takes_medicine: takes_medicine,
   });
-  return {error}
+  return { error };
 };
