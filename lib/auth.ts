@@ -8,7 +8,7 @@ export const signUp = async (
   businessAddress: string,
   businessName: string,
   businessType: string,
-  phone: string
+  phone: string,
 ) => {
   const { data, error } = await supabase.auth.signUp({ email, password });
   if (error) {
@@ -16,24 +16,27 @@ export const signUp = async (
   } else {
     const { error } = await supabase
       .from("Users")
-      .insert({ id: data.user?.id, username: username, email: email,isShopkeeper:isShopkeeper });
+      .insert({
+        id: data.user?.id,
+        username: username,
+        email: email,
+        isShopkeeper: isShopkeeper,
+      });
     if (error) {
       return { error };
     } else {
       if (isShopkeeper) {
-        const { error } = await supabase
-          .from("Shopkeepers")
-          .insert({
-            id: data.user?.id,
-            businessName: businessName,
-            businessAddress: businessAddress,
-            businessType: businessType,
-            phone: phone,
-          });
-        return {error};
+        const { error } = await supabase.from("Shopkeepers").insert({
+          id: data.user?.id,
+          businessName: businessName,
+          businessAddress: businessAddress,
+          businessType: businessType,
+          phone: phone,
+        });
+        return { error };
       }
     }
-    return {error}
+    return { error };
   }
 };
 export const signin = async (email: string, password: string) => {

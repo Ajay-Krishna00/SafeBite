@@ -34,23 +34,23 @@ export const InputWithLabel = ({
 function login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
   async function handleLogin() {
-    setError("")
-    setLoading(true)
-    const {error} = await signin(email,password)
+    setError("");
+    setLoading(true);
+    const { error } = await signin(email, password);
     if (error) {
-      setError(error.message)
+      setError(error.message);
     } else {
-      router.replace('/onboarding')
+      router.replace("/onboarding");
     }
-    setLoading(false)
+    setLoading(false);
   }
-    
+
   return (
     <View className="flex-1 justify-center items-center bg-gray-200">
       <View className="bg-white p-8 gap-8 w-[80%] rounded-lg shadow-lg">

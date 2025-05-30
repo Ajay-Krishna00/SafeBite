@@ -152,7 +152,7 @@ const selectElement = (
 
 const onboarding = () => {
   function handleSubmit() {
-    router.replace('/home')
+    router.replace("/home");
   }
   return (
     <View className="flex-1 flex-col bg-gray-200 p-3 pt-5 gap-5">

@@ -11,6 +11,7 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
-    "nativewind-env.d.ts"
-, "backend/routes/summary.js"  ]
+    "nativewind-env.d.ts",
+    "backend/routes/summary.js"
+  ]
 }

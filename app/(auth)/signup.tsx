@@ -35,7 +35,7 @@ const signup = () => {
       businessAddress,
       businessName,
       businessType,
-      phone
+      phone,
     );
     if (error) {
       setError(error.message);

@@ -8,7 +8,9 @@ router.post("/", async (req, res) => {
     const { userProfile, productData } = req.body;
 
     if (!userProfile || !productData) {
-      return res.status(400).json({ error: "Missing user profile or product data" });
+      return res
+        .status(400)
+        .json({ error: "Missing user profile or product data" });
     }
 
     const summary = await askAI(productData, userProfile);
@@ -19,4 +21,4 @@ router.post("/", async (req, res) => {
   }
 });
 
-module.exports = router
+module.exports = router;

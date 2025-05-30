@@ -1,23 +1,30 @@
-import { View, Text, ActivityIndicator, ScrollView, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  ActivityIndicator,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { useLocalSearchParams, useNavigation } from "expo-router";
 import handleSummary from "../services/summary";
 
 export interface ProductData {
-  "product_name": string;
-  "ingredients": string,
-  "allergens": string,
-  "additives": string[],
-  "nutritional_info": {
-    "sugar": string,
-    "fat": string,
-    "salt": string,
-    "calories": string,
-    "proteins": string,
-  },
-  "labels": string[],
-  "nova_score": number,
-  "nutrition_grade": string,
+  product_name: string;
+  ingredients: string;
+  allergens: string;
+  additives: string[];
+  nutritional_info: {
+    sugar: string;
+    fat: string;
+    salt: string;
+    calories: string;
+    proteins: string;
+  };
+  labels: string[];
+  nova_score: number;
+  nutrition_grade: string;
 }
 
 const ProductSummary = () => {
@@ -134,68 +141,104 @@ const ProductSummary = () => {
               <Text className="text-2xl font-bold ">
                 {productData.product_name || "Unknown Product"}
               </Text>
-                </View>
-                {/* Nutrition Grade + Nova */}
-        <Text className="text-md text-gray-700  mb-2">
-          🧪 Nutrition Grade: <Text className="font-semibold uppercase">{productData.nutriscore_grade || 'N/A'}</Text>
-        </Text>
-        <Text className="text-md text-gray-700 mb-2">
-          🔬 Processing: <Text className="font-semibold">Nova {productData.nova_group || 'N/A'}</Text>
-        </Text>
+            </View>
+            {/* Nutrition Grade + Nova */}
+            <Text className="text-md text-gray-700  mb-2">
+              🧪 Nutrition Grade:{" "}
+              <Text className="font-semibold uppercase">
+                {productData.nutriscore_grade || "N/A"}
+              </Text>
+            </Text>
+            <Text className="text-md text-gray-700 mb-2">
+              🔬 Processing:{" "}
+              <Text className="font-semibold">
+                Nova {productData.nova_group || "N/A"}
+              </Text>
+            </Text>
 
-      {/* Allergens */}
-      <Text className="text-md font-semibold text-red-600 mb-3">⚠️ Allergens:
-      <Text className="text-md text-gray-700 ">{productData.allergens|| 'None listed'}</Text>
-</Text>
-      {/* Additives */}
-      <Text className="text-md font-semibold text-yellow-700 mb-3">🧬 Additives:
-      <Text className="text-md text-gray-700 ">
-        {productData.additives_tags?.length
-          ? productData.additives_tags.map((tag:any) => tag.replace('en:', '')).join(', ')
-          : 'None listed'}
-      </Text>
-      </Text>
-      {/* Ingredients */}
-      <Text className="text-md font-semibold text-green-700 mb-1">🥗 Ingredients:</Text>
-      <Text className="text-md text-gray-700 mb-3">{productData.ingredients_text || 'Not available'}</Text>
+            {/* Allergens */}
+            <Text className="text-md font-semibold text-red-600 mb-3">
+              ⚠️ Allergens:
+              <Text className="text-md text-gray-700 ">
+                {productData.allergens || "None listed"}
+              </Text>
+            </Text>
+            {/* Additives */}
+            <Text className="text-md font-semibold text-yellow-700 mb-3">
+              🧬 Additives:
+              <Text className="text-md text-gray-700 ">
+                {productData.additives_tags?.length
+                  ? productData.additives_tags
+                      .map((tag: any) => tag.replace("en:", ""))
+                      .join(", ")
+                  : "None listed"}
+              </Text>
+            </Text>
+            {/* Ingredients */}
+            <Text className="text-md font-semibold text-green-700 mb-1">
+              🥗 Ingredients:
+            </Text>
+            <Text className="text-md text-gray-700 mb-3">
+              {productData.ingredients_text || "Not available"}
+            </Text>
 
-      {/* Nutritional Info */}
-      <Text className="text-md font-semibold text-purple-700 mb-1">📊 Nutritional Info (per 100g):</Text>
-      <View className="pl-2">
-        <Text className="text-gray-700">Calories: {productData.nutriments?.['energy-kcal_100g'] || 'N/A'} kcal</Text>
-        <Text className="text-gray-700">Sugar: {productData.nutriments?.['sugars_100g'] || 'N/A'} g</Text>
-        <Text className="text-gray-700">Fat: {productData.nutriments?.['fat_100g'] || 'N/A'} g</Text>
-        <Text className="text-gray-700">Salt: {productData.nutriments?.['salt_100g'] || 'N/A'} g</Text>
-        <Text className="text-gray-700">Protein: {productData.nutriments?.['proteins_100g'] || 'N/A'} g</Text>
-      </View>
+            {/* Nutritional Info */}
+            <Text className="text-md font-semibold text-purple-700 mb-1">
+              📊 Nutritional Info (per 100g):
+            </Text>
+            <View className="pl-2">
+              <Text className="text-gray-700">
+                Calories:{" "}
+                {productData.nutriments?.["energy-kcal_100g"] || "N/A"} kcal
+              </Text>
+              <Text className="text-gray-700">
+                Sugar: {productData.nutriments?.["sugars_100g"] || "N/A"} g
+              </Text>
+              <Text className="text-gray-700">
+                Fat: {productData.nutriments?.["fat_100g"] || "N/A"} g
+              </Text>
+              <Text className="text-gray-700">
+                Salt: {productData.nutriments?.["salt_100g"] || "N/A"} g
+              </Text>
+              <Text className="text-gray-700">
+                Protein: {productData.nutriments?.["proteins_100g"] || "N/A"} g
+              </Text>
+            </View>
 
-      {/* Labels */}
-      <Text className="text-md font-semibold text-blue-700 mt-4 mb-1">🏷️ Labels:</Text>
-      <Text className="text-gray-700">
-        {productData.labels_tags?.length
-          ? productData.labels_tags.map((tag:any) => tag.replace('en:', '')).join(', ')
-          : 'None'}
-      </Text>
+            {/* Labels */}
+            <Text className="text-md font-semibold text-blue-700 mt-4 mb-1">
+              🏷️ Labels:
+            </Text>
+            <Text className="text-gray-700">
+              {productData.labels_tags?.length
+                ? productData.labels_tags
+                    .map((tag: any) => tag.replace("en:", ""))
+                    .join(", ")
+                : "None"}
+            </Text>
 
-      {/* Expiry Date */}
-      <Text className="text-md font-semibold text-orange-600 mt-4 mb-1">⏳ Expiry Date:</Text>
-                <Text className="text-gray-700">{productData.expiration_date || 'Not available'}</Text>
-                
+            {/* Expiry Date */}
+            <Text className="text-md font-semibold text-orange-600 mt-4 mb-1">
+              ⏳ Expiry Date:
+            </Text>
+            <Text className="text-gray-700">
+              {productData.expiration_date || "Not available"}
+            </Text>
 
+            <View className="mt-5">
+              <Text className="text-lg font-semibold text-gray-800 mb-2">
+                AI Summary
+              </Text>
+            </View>
 
-                <View className="mt-5">
-                  <Text className="text-lg font-semibold text-gray-800 mb-2">AI Summary</Text>
-                </View>
-  
-
-                <TouchableOpacity
-                  className="mt-10 bg-green-600 p-3 rounded-lg mb-15"
-                  onPress={() => navigation.goBack()} 
-                >
-                  <Text className="text-white text-center text-lg font-semibold">
-                    Go Back
-                  </Text>
-                </TouchableOpacity>
+            <TouchableOpacity
+              className="mt-10 bg-green-600 p-3 rounded-lg mb-15"
+              onPress={() => navigation.goBack()}
+            >
+              <Text className="text-white text-center text-lg font-semibold">
+                Go Back
+              </Text>
+            </TouchableOpacity>
           </ScrollView>
         </View>
       )}
@@ -204,4 +247,3 @@ const ProductSummary = () => {
 };
 
 export default ProductSummary;
-
