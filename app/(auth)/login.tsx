@@ -52,6 +52,7 @@ function login() {
         <TouchableOpacity
           onPress={handleLogin}
           className="bg-green-700 text-center h-8 justify-center p-1 rounded-md"
+          disabled={loading}
         >
           <Text className="text-white text-lg font-bold text-center">
             Log in
