@@ -47,7 +47,7 @@ const ProductSummary = () => {
         const data = await res.json();
         if (data.status === 1) {
           setProductData(data.product);
-          const timer=setTimeout(()=>{ setSummData({
+          setSummData({
             product_name: data.product?.product_name || "Unknown Product",
             ingredients: data.product?.ingredients_text || "Not available",
             allergens: data.product?.allergens || "None listed",
@@ -70,8 +70,6 @@ const ProductSummary = () => {
                 data.product?.image_url ||
                 "https://placehold.co/360x260?text=No+Image&font=roboto"),
             );
-          }, 1000)
-          clearTimeout(timer);
         } else {
           setNotFound(true);
         }
@@ -83,13 +81,21 @@ const ProductSummary = () => {
       } finally {
         setLoading(false);
       }
-      console.log("Product Data:", summData);
-      const summary = await handleSummary(summData || productData);
-      setSummaryData(summary.summary || null);
     };
     fetchData();
     
   }, [id]);
+
+  useEffect(() => {
+    const fetchSummary = async () => {
+      if (summData) {
+        const summary = await handleSummary(summData);
+        setSummaryData(summary?.summary || null);
+      }
+    };
+    fetchSummary();
+  }, [summData]);
+
   return (
     <>
       {loading ? (
