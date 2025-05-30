@@ -20,7 +20,7 @@ const TabIcon = ({
       </View>
     ) : (
       <View className="items-center justify-center w-full min-w-[120px] min-h-16 mt-5 rounded-full overflow-hidden">
-        <Image source={icon} className="size-4" tintColor="#ffffff" />
+        <Image source={icon} className="size-5" tintColor="#ffffff" />
       </View>
     )}
   </>
