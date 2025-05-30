@@ -1,7 +1,13 @@
 import { signin } from "@/lib/auth";
 import { Link, useRouter } from "expo-router";
 import { useState } from "react";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import {
+  ActivityIndicator,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 export const SText = ({ className = "", ...props }) => {
   return <Text className={`text-[#0D0D0D] ${className}`} {...props} />;
@@ -63,9 +69,12 @@ function login() {
           className="bg-green-700 text-center h-8 justify-center p-1 rounded-md"
           disabled={loading}
         >
-          <Text className="text-white text-lg font-bold text-center">
-            Log in
-          </Text>
+          {!loading && (
+            <Text className="text-white text-lg font-bold text-center">
+              Login
+            </Text>
+          )}
+          {loading && <ActivityIndicator size={20} color={"white"} />}
         </TouchableOpacity>
         <SText>
           Don't have an account?Create a new one:{" "}

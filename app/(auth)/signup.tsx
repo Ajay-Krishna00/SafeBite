@@ -1,7 +1,7 @@
 import { signUp } from "@/lib/auth";
 import { Link, useRouter } from "expo-router";
 import React, { useState } from "react";
-import { Switch, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, Switch, Text, TouchableOpacity, View } from "react-native";
 import { InputWithLabel, SText } from "./login";
 
 const signup = () => {
@@ -26,6 +26,8 @@ const signup = () => {
         (!businessAddress || !businessName || !businessType || !phone))
     ) {
       setError("Please fill in all details");
+      setLoading(false)
+      return
     }
     const { error } = await signUp(
       username,
@@ -35,7 +37,7 @@ const signup = () => {
       businessAddress,
       businessName,
       businessType,
-      phone,
+      phone
     );
     if (error) {
       setError(error.message);
@@ -54,16 +56,7 @@ const signup = () => {
         <InputWithLabel name="Username" value={username} change={setUsername} />
         <InputWithLabel name="Email" value={email} change={setEmail} />
         <InputWithLabel name="Password" value={password} change={setPassword} />
-        <View className="flex-row gap-2 justify-center">
-          <SText>Customer</SText>
-          <Switch
-            value={isShopkeeper}
-            onValueChange={() => {
-              setIsShopkeeper((prev) => !prev);
-            }}
-          />
-          <SText>Shopkeeper</SText>
-        </View>
+
         {isShopkeeper && (
           <>
             <InputWithLabel
@@ -88,15 +81,26 @@ const signup = () => {
             />
           </>
         )}
+        <View className="flex-row gap-1 justify-start items-center">
+          <SText className="max-h-[60%]">Customer</SText>
+          <Switch
+            value={isShopkeeper}
+            onValueChange={() => {
+              setIsShopkeeper((prev) => !prev);
+            }}
+          />
+          <SText className="max-h-[60%]">Shopkeeper</SText>
+        </View>
         {error && <SText className="text-red-600">{error}</SText>}
         <TouchableOpacity
           onPress={handleSignup}
           className="bg-green-700 text-center h-8 justify-center p-1 rounded-md"
           disabled={loading}
         >
-          <Text className="text-white text-lg font-bold text-center">
+          {!loading && <Text className="text-white text-lg font-bold text-center">
             Sign Up
-          </Text>
+          </Text>}
+          {loading && <ActivityIndicator size={20} color={"white"} />}
         </TouchableOpacity>
         <SText>
           Already have an account?{" "}
