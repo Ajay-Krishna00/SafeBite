@@ -108,10 +108,10 @@ const profile = () => {
       <Text className="text-center font-bold">Takes Medication</Text>
       <View className="flex-row flex-wrap justify-center">
         {takesMedication ? (
-          list(takesMedication)
+          <Text className="text-red-500">Yes</Text>
         ) : (
           <Text className="text-red-500">No Medication</Text>
-        )}
+        )}
       </View>
 
       {isShopkeeper && (
