@@ -7,7 +7,7 @@ import { ChatCompletionMessageParam } from "groq-sdk/resources/chat/completions.
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY || "" });
 
-const askAI = async (productData: any, userProfile: any) => {
+const askAI = async (productData, userProfile) => {
   const prompt = `
 User has the following health profile:
 - Allergies: ${userProfile.allergies.join(", ")}
@@ -18,7 +18,7 @@ Based on the following product data, summarize whether this product is safe or r
 ${JSON.stringify(productData, null, 2)}
   `;
 
-  const messages: ChatCompletionMessageParam[] = [
+  const messages = [
     {
       role: "system",
       content: `You are a helpful assistant that summarizes food products with health relevance.`,
@@ -37,7 +37,7 @@ ${JSON.stringify(productData, null, 2)}
   return response.choices[0].message.content;
 };
 
-router.post("/", async (req: express.Request, res: express.Response) => {
+router.post("/", async (req, res) => {
   try {
     const { userProfile, productData } = req.body;
 
