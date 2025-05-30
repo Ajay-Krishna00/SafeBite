@@ -5,11 +5,11 @@ import sb from "@/assets/images/sb.png";
 
 export default function Index() {
   const router = useRouter();
-  const isLoggedIn = false;
+  const isLoggedIn = true;
   useEffect(() => {
     const timer = setTimeout(() => {
       if (isLoggedIn) {
-        router.replace("/(tabs)");
+        router.replace("/home");
       } else {
         router.replace("/(auth)/login");
       }
