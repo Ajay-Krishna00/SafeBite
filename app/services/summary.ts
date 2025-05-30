@@ -2,7 +2,7 @@ import { ProductData } from "../product/[id]";
 
 const handleSummary = async (productData: ProductData) => {
   try {
-    const res = await fetch("https://localhost:3000/api/summary", {
+    const res = await fetch("https://safebite-28tg.onrender.com/api/summary", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

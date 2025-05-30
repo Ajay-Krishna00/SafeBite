@@ -35,9 +35,9 @@ const ProductSummary = () => {
   const [imgUri, setImgUri] = useState<string | null>(null);
   const [imgLoading, setImgLoading] = useState<boolean>(true);
   const [summData, setSummData] = useState<ProductData>();
+  const [summaryData, setSummaryData] = useState<string | null>(null);
 
   const navigation = useNavigation();
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -63,15 +63,13 @@ const ProductSummary = () => {
             nova_score: data.product?.nova_group || 0,
             nutrition_grade: data.product?.nutrition_grades || "N/A",
           });
-          const summary = await handleSummary(summData || data.product);
-          console.log("Summary Result:", summary);
           setImgUri(
             data.product?.selected_images?.front?.display?.fr ??
               data.product?.selected_images?.front?.display?.en ??
               (data.product?.selected_images?.front?.display?.default ||
                 data.product?.image_url ||
                 "https://placehold.co/360x260?text=No+Image&font=roboto"),
-          );
+            );
         } else {
           setNotFound(true);
         }
@@ -85,7 +83,18 @@ const ProductSummary = () => {
       }
     };
     fetchData();
+    
   }, [id]);
+
+  useEffect(() => {
+    const fetchSummary = async () => {
+      if (summData) {
+        const summary = await handleSummary(summData);
+        setSummaryData(summary?.summary || null);
+      }
+    };
+    fetchSummary();
+  }, [summData]);
 
   return (
     <>
@@ -228,14 +237,17 @@ const ProductSummary = () => {
             <View className="mt-5">
               <Text className="text-lg font-semibold text-gray-800 mb-2">
                 AI Summary
-              </Text>
+                  </Text>
+                  <Text className="text-gray-700">
+                    {summaryData || "No summary available for this product."}
+                    </Text>
             </View>
 
             <TouchableOpacity
-              className="mt-10 bg-green-600 p-3 rounded-lg mb-15"
+              className=" bg-green-600 p-3 rounded-lg mb-20 mt-4"
               onPress={() => navigation.goBack()}
             >
-              <Text className="text-white text-center text-lg font-semibold">
+              <Text className="text-white text-center text-lg font-semibold ">
                 Go Back
               </Text>
             </TouchableOpacity>
