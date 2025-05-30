@@ -2,21 +2,26 @@ import { useRouter } from "expo-router";
 import { useEffect } from "react";
 import { Image, Text, View } from "react-native";
 import sb from "@/assets/images/sb.png";
+import { supabase } from "@/lib/supabase";
 
 export default function Index() {
   const router = useRouter();
-  const isLoggedIn = true;
+  // const isLoggedIn = false;
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (isLoggedIn) {
-        router.replace("/home");
-      } else {
-        router.replace("/(auth)/login");
-      }
-    }, 4000);
-
-    return () => clearTimeout(timer);
-  }, [isLoggedIn]);
+    const checkUser = async () => {
+      const { data: user } = await supabase.auth.getUser();
+      const isLoggedIn = user;
+      const timer = setTimeout(() => {
+        if (isLoggedIn) {
+          router.replace("/home");
+        } else {
+          router.replace("/login");
+        }
+      }, 4000);
+      return () => clearTimeout(timer);
+    };
+    checkUser();
+  }, []);
   return (
     <View
       style={{

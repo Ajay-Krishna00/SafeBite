@@ -1,95 +1,19 @@
-import React, { useState } from "react";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
-import { SText } from "./login";
 import {
   commonAllergies,
   dietaryRestrictions,
   medicalConditions,
   questions,
 } from "@/constants/const";
+import { setOnboardingDetails } from "@/lib/actions";
 import { router } from "expo-router";
-
-const QuestionComp = ({
-  question,
-}: {
-  question: { text: string; type: string; relatedTo: string };
-}) => {
-  const [selectedAllergies, setSelectedAllergies] = useState<string[]>([]);
-  const [selectedMedicalConditions, setSelectedMedicalConditions] = useState<
-    string[]
-  >([]);
-  const [selectedDietaryRestrictions, setSelectedDietaryRestrictions] =
-    useState<string[]>([]);
-  const [selectedAgeGroup, setSelectedAgeGroup] = useState<
-    string | undefined
-  >();
-  const [selectedAllergySeverity, setSelectedAllergySeverity] = useState<
-    string | undefined
-  >();
-  const [selectedYesNo, setSelectedYesNo] = useState<string | undefined>();
-  return (
-    <View className="mt-5">
-      <SText className="font-semibold text-lg">{question.text}</SText>
-      {question.type === "list" && (
-        <View style={{ flexWrap: "wrap", flexDirection: "row" }}>
-          {question.relatedTo === "allergies" &&
-            lists(commonAllergies, selectedAllergies, setSelectedAllergies)}
-          {question.relatedTo === "medicalConditions" &&
-            lists(
-              medicalConditions,
-              selectedMedicalConditions,
-              setSelectedMedicalConditions,
-            )}
-          {question.relatedTo === "dietaryRestrictions" &&
-            lists(
-              dietaryRestrictions,
-              selectedDietaryRestrictions,
-              setSelectedDietaryRestrictions,
-            )}
-        </View>
-      )}
-      {question.type === "yesno" && (
-        <View className="flex-row gap-2">
-          {singleAnswer("Yes", selectedYesNo, setSelectedYesNo)}
-          {singleAnswer("No", selectedYesNo, setSelectedYesNo)}
-        </View>
-      )}
-      {question.type === "select" &&
-        (question.relatedTo === "allergySeverity" ? (
-          <View className="flex-row gap-2">
-            {singleAnswer(
-              "Mild",
-              selectedAllergySeverity,
-              setSelectedAllergySeverity,
-            )}
-            {singleAnswer(
-              "Moderate",
-              selectedAllergySeverity,
-              setSelectedAllergySeverity,
-            )}
-            {singleAnswer(
-              "Severe",
-              selectedAllergySeverity,
-              setSelectedAllergySeverity,
-            )}
-          </View>
-        ) : question.relatedTo === "ageGroup" ? (
-          <View className="flex-row gap-2 flex-wrap">
-            {singleAnswer("0-12", selectedAgeGroup, setSelectedAgeGroup)}
-            {singleAnswer("13-19", selectedAgeGroup, setSelectedAgeGroup)}
-            {singleAnswer("20-35", selectedAgeGroup, setSelectedAgeGroup)}
-            {singleAnswer("36-50", selectedAgeGroup, setSelectedAgeGroup)}
-            {singleAnswer("51+", selectedAgeGroup, setSelectedAgeGroup)}
-          </View>
-        ) : null)}
-    </View>
-  );
-};
+import React, { useState } from "react";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { SText } from "./login";
 
 const lists = (
   Arr: string[],
   selected: string[],
-  setSelected: React.Dispatch<React.SetStateAction<string[]>>,
+  setSelected: React.Dispatch<React.SetStateAction<string[]>>
 ) => {
   return Arr.map((e) => (
     <TouchableOpacity
@@ -109,7 +33,7 @@ const lists = (
 const singleAnswer = (
   e: string,
   selected: string | undefined,
-  setSelected: React.Dispatch<React.SetStateAction<string | undefined>>,
+  setSelected: React.Dispatch<React.SetStateAction<string | undefined>>
 ) => {
   return (
     <TouchableOpacity
@@ -130,7 +54,7 @@ const singleAnswer = (
 const toggleElement = (
   element: string,
   selected: string[],
-  setSelected: React.Dispatch<React.SetStateAction<string[]>>,
+  setSelected: React.Dispatch<React.SetStateAction<string[]>>
 ) => {
   if (selected.includes(element)) {
     setSelected(selected.filter((e) => e !== element));
@@ -141,7 +65,7 @@ const toggleElement = (
 const selectElement = (
   element: string,
   selected: string | undefined,
-  setSelected: React.Dispatch<React.SetStateAction<string | undefined>>,
+  setSelected: React.Dispatch<React.SetStateAction<string | undefined>>
 ) => {
   if (selected === element) {
     setSelected(undefined);
@@ -150,8 +74,77 @@ const selectElement = (
   }
 };
 
+const QuestionsComp2 = ({
+  question,
+  value,
+  change,
+  common,
+}: {
+  question: { text: string; type: string; relatedTo: string };
+  value: string | undefined;
+  common: string[];
+  change: any;
+}) => {
+  return (
+    <View className="mt-5">
+      <SText className="font-semibold text-lg">{question.text}</SText>
+      <View className="flex-row gap-2">
+        {common.map((c) => singleAnswer(c, value, change))}
+      </View>
+    </View>
+  );
+};
+const QuestionsComp1 = ({
+  question,
+  value,
+  change,
+  common,
+}: {
+  question: { text: string; type: string; relatedTo: string };
+  value: string[];
+  common: string[];
+  change: any;
+}) => {
+  return (
+    <View className="mt-5">
+      <SText className="font-semibold text-lg">{question.text}</SText>
+      <View style={{ flexWrap: "wrap", flexDirection: "row" }}>
+        {lists(common, value, change)}
+      </View>
+    </View>
+  );
+};
+
 const onboarding = () => {
-  function handleSubmit() {
+  const [selectedAllergies, setSelectedAllergies] = useState<string[]>([]);
+  const [selectedMedicalConditions, setSelectedMedicalConditions] = useState<
+    string[]
+  >([]);
+  const [selectedDietaryRestrictions, setSelectedDietaryRestrictions] =
+    useState<string[]>([]);
+  const [selectedAgeGroup, setSelectedAgeGroup] = useState<
+    string | undefined
+  >();
+  const [selectedAllergySeverity, setSelectedAllergySeverity] = useState<
+    string | undefined
+  >();
+  const [selectedYesNo, setSelectedYesNo] = useState<string | undefined>();
+  const [error, setError] = useState("");
+  async function handleSubmit() {
+    const { error } = await setOnboardingDetails({
+      details: {
+        allergies: selectedAllergies,
+        medical_conditions: selectedMedicalConditions,
+        dietary_restrictions: selectedDietaryRestrictions,
+        age_group: selectedAgeGroup,
+        allergy_severity: selectedAllergySeverity,
+        takes_medicine: selectedYesNo == "Yes",
+      },
+    });
+    if (error) {
+      setError("Please try again");
+      return;
+    }
     router.replace("/home");
   }
   return (
@@ -160,9 +153,43 @@ const onboarding = () => {
         contentContainerStyle={{ paddingBottom: 80 }}
         scrollEnabled={true}
       >
-        {questions.map((question, index) => (
-          <QuestionComp key={index} question={question} />
-        ))}
+        <QuestionsComp1
+          question={questions[0]}
+          value={selectedAllergies}
+          common={commonAllergies}
+          change={setSelectedAllergies}
+        />
+        <QuestionsComp1
+          question={questions[1]}
+          value={selectedMedicalConditions}
+          common={medicalConditions}
+          change={setSelectedMedicalConditions}
+        />
+        <QuestionsComp1
+          question={questions[2]}
+          value={selectedDietaryRestrictions}
+          common={dietaryRestrictions}
+          change={setSelectedDietaryRestrictions}
+        />
+        <QuestionsComp2
+          question={questions[3]}
+          value={selectedYesNo}
+          common={["Yes", "No"]}
+          change={setSelectedYesNo}
+        />
+        <QuestionsComp2
+          question={questions[4]}
+          value={selectedAllergySeverity}
+          common={["Mild", "Moderate", "Severe"]}
+          change={setSelectedAllergySeverity}
+        />
+        <QuestionsComp2
+          question={questions[5]}
+          value={selectedAgeGroup}
+          common={["0-12", "13-19", "20-35", "36-50", "51+"]}
+          change={setSelectedAgeGroup}
+        />
+        {error && <Text className="text-red-600">{error}</Text>}
         <TouchableOpacity
           className="flex-1 p-2 rounded-md bg-green-700 align-center py-2 h-14 justify-center mt-10"
           onPress={handleSubmit}
