@@ -2,12 +2,10 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useEffect } from "react";
 import qr from "@/assets/images/qr.jpg";
-import ScanScreen from "../scan";
 import { useRouter } from "expo-router";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
-  withSpring,
   withRepeat,
   withTiming,
 } from "react-native-reanimated";

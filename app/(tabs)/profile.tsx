@@ -1,6 +1,6 @@
 import { useRouter } from 'expo-router';
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Button, Card, Title } from 'react-native-paper';
 
 const Styles = StyleSheet.create({
@@ -41,11 +41,11 @@ const profile = () => {
       </Card.Content>
 
       <Card.Actions>
-         <Button onPress={goToShop}>Select</Button>
+        <Button onPress={goToShop}>Select</Button>
       </Card.Actions>
 
     </Card>
-    <Button className='bg-red-700'><Title className='text-white font-bold'>Logout</Title></Button>
+    <TouchableOpacity className='bg-red-500 rounded-lg'><Text className='text-white font-bold text-xl px-5 py-2'>Logout</Text></TouchableOpacity>
     </View>
   );
 };

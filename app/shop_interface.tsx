@@ -5,7 +5,8 @@ import itemImage from './itemImg';
 
 const item = [
   {
-    name : "Lays",
+    name: "Lays",
+    key: "lays",
     price : 20,
     imgsrc : itemImage[0],
     stock_count : 0,
@@ -13,7 +14,8 @@ const item = [
     expiry : "2025-05-25"
   },
   {
-    name : "Pepsi",
+    name: "Pepsi",
+    key: "pepsi",
     price : 60,
     imgsrc : itemImage[1],
     stock_count : 20,
@@ -21,7 +23,8 @@ const item = [
     expiry : "2025-12-27"
   },
   {
-    name : "Elite Maida",
+    name: "Elite Maida",
+    key: "elite_maida",
     price : 100,
     imgsrc : itemImage[2],
     stock_count : 30,
@@ -29,7 +32,8 @@ const item = [
     expiry : "2025-05-30"
   },
   {
-    name : "Boost",
+    name: "Boost",
+    key: "boost",
     price : 70,
     imgsrc : itemImage[3],
     stock_count : 20,
@@ -37,7 +41,8 @@ const item = [
     expiry : "2025-07-25"
   },
   {
-    name : "Milma curd",
+    name: "Milma curd",
+    key: "milma_curd",
     price : 35,
     imgsrc : itemImage[4],
     stock_count : 10,
@@ -45,7 +50,8 @@ const item = [
     expiry : "2025-06-03"
   },
   {
-    name : "Goodday",
+    name: "Goodday",
+    key: "goodday",
     price : 20,
     imgsrc : itemImage[5],
     stock_count : 10,
