@@ -2,7 +2,7 @@ import { supabase } from "@/lib/supabase";
 import { useRouter } from "expo-router";
 import React, { useEffect } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { Button, Card, Title } from "react-native-paper";
+import { Button, Title } from "react-native-paper";
 
 const Styles = StyleSheet.create({
   container: {
@@ -77,7 +77,8 @@ const profile = () => {
       }}
       className="px-10 py-5 bg-white gap-3"
     >
-      <Title className="text-center font-bold mt-10">{users?.username}</Title>
+      <Text className="font-extrabold mt-10 text-3xl underline">Profile</Text>
+      <Title className="text-center font-bold mt-2">{users?.username}</Title>
 
       <Text className="text-center font-bold">{user?.user?.email}</Text>
       <Text className="text-center font-bold">Allergies</Text>
@@ -114,42 +115,53 @@ const profile = () => {
       </View>
 
       {isShopkeeper && (
-        <>
-          <View
-            style={{
-              flex: 1,
-              alignItems: "flex-start",
-            }}
-            className="px-10 py-5 bg-white gap-3"
+        <View
+          style={{
+            flex: 1,
+            alignItems: "flex-start",
+          }}
+          className="px-10 pt-5 gap-3"
+        >
+          <Title className="text-center font-bold">Shop Details</Title>
+          <Text className="text-center font-bold">
+            Shop Name: {shop?.businessName}
+          </Text>
+          <Text className="text-center font-bold">
+            Shop Address: {shop?.businessAddress}
+          </Text>
+          <Text className="text-center font-bold">
+            Shop Contact: {shop?.businessType}
+          </Text>
+          <Button
+            mode="contained"
+            onPress={goToShop}
+            className="bg-green-500 rounded-lg"
           >
-            <Title className="text-center font-bold">Shop Details</Title>
-            <Text className="text-center font-bold">
-              Shop Name: {shop?.businessName}
+            Go to Shop
+          </Button>
+
+          <TouchableOpacity
+            className="bg-red-500 rounded-lg ml-1"
+            onPress={async () => {
+              await supabase.auth.signOut();
+            }}
+          >
+            <Text className="text-white font-bold text-xl px-5 py-2">
+              Logout
             </Text>
-            <Text className="text-center font-bold">
-              Shop Address: {shop?.businessAddress}
-            </Text>
-            <Text className="text-center font-bold">
-              Shop Contact: {shop?.businessType}
-            </Text>
-            <Button
-              mode="contained"
-              onPress={goToShop}
-              className="bg-green-500 rounded-lg"
-            >
-              Go to Shop
-            </Button>
-          </View>
-        </>
+          </TouchableOpacity>
+        </View>
       )}
-      <TouchableOpacity
-        className="bg-red-500 rounded-lg"
-        onPress={async () => {
-          await supabase.auth.signOut();
-        }}
-      >
-        <Text className="text-white font-bold text-xl px-5 py-2">Logout</Text>
-      </TouchableOpacity>
+      {!isShopkeeper && (
+        <TouchableOpacity
+          className="bg-red-500 rounded-lg"
+          onPress={async () => {
+            await supabase.auth.signOut();
+          }}
+        >
+          <Text className="text-white font-bold text-xl px-5 py-2">Logout</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
