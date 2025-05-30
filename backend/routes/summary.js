@@ -1,40 +1,7 @@
 import express from "express";
+import { askAI } from "../controllers/aiController.js";
 
 const router = express.Router();
-
-import Groq from "groq-sdk";
-
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY || "" });
-
-const askAI = async (productData, userProfile) => {
-  const prompt = `
-User has the following health profile:
-- Allergies: ${userProfile.allergies.join(", ")}
-- Medical Conditions: ${userProfile.conditions.join(", ")}
-
-Based on the following product data, summarize whether this product is safe or risky for them. Be concise and highlight key risks or safe points.
-
-${JSON.stringify(productData, null, 2)}
-  `;
-
-  const messages = [
-    {
-      role: "system",
-      content: `You are a helpful assistant that summarizes food products with health relevance.`,
-    },
-    {
-      role: "user",
-      content: prompt,
-    },
-  ];
-
-  const response = await groq.chat.completions.create({
-    messages,
-    model: "deepseek-r1-distill-llama-70b",
-  });
-
-  return response.choices[0].message.content;
-};
 
 router.post("/", async (req, res) => {
   try {

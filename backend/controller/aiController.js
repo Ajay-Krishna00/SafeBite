@@ -1,8 +1,8 @@
-// controllers/aiController.js
 import Groq from "groq-sdk";
 
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY || "" });
+
 export const askAI = async (productData, userProfile) => {
-  const groq = new Groq({ apiKey: process.env.GROQ_API_KEY || "" });
 
   const prompt = `
 User has the following health profile:
