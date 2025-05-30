@@ -1,5 +1,5 @@
-import express from "express";
-import { askAI } from "../controllers/aiController.js";
+const express = require("express");
+const { askAI } = require("../controllers/aiController");
 
 const router = express.Router();
 

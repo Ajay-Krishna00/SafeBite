@@ -1,8 +1,8 @@
+const express = require("express");
+const cors = require("cors");
+const dotenv = require("dotenv");
+const summaryRoute = require("./routes/summary");
 
-import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import summaryRoute from "./routes/summary.js"; 
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
