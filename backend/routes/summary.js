@@ -3,7 +3,6 @@ import express from "express";
 const router = express.Router();
 
 import Groq from "groq-sdk";
-import { ChatCompletionMessageParam } from "groq-sdk/resources/chat/completions.mjs";
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY || "" });
 
