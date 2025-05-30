@@ -32,3 +32,4 @@ ${JSON.stringify(productData, null, 2)}
 
   return AIResponse.choices[0].message.content;
 };
+module.exports = { askAI };
