@@ -1,50 +1,185 @@
-# Welcome to your Expo app 👋
+# 🥗 SafeBite
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+> **Scan Smart. Eat Safe. Live Well.**
 
-## Get started
+SafeBite is a mobile-first HealthTech application built using React Native. It empowers users to scan food product barcodes/QR codes to detect ingredients that may be harmful based on their medical conditions or dietary restrictions — while also helping shopkeepers manage inventory with real-time expiry tracking.
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## 💡 Problem Statement
 
-2. Start the app
+In today’s fast-paced world, ensuring food safety is challenging for both **consumers** and **shopkeepers**:
 
-   ```bash
-   npx expo start
-   ```
+- Consumers with **allergies**, **diabetes**, **heart disease**, or other conditions often lack the means to verify whether a food item is safe for them.
+- Shopkeepers frequently overlook **expiry management**, causing waste and posing health risks.
 
-In the output, you'll find options to open the app in a
+> According to WHO, anaphylaxis-related deaths are on the rise, with an increase from 0.51 to 0.76 per million annually between 2004 and now.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+---
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 🎯 Approach & Solution
 
-## Get a fresh project
+SafeBite solves this dual-sided problem by providing:
 
-When you're ready, run:
+### 🔹 For Consumers:
+- Barcode/QR scanning to instantly detect harmful ingredients.
+- Personalized warnings based on the user’s health profile.
+- Expiry notifications and safe product suggestions.
+- Recipe ideas based on purchased items.
 
+### 🔹 For Shopkeepers:
+- Track product expiry using barcodes.
+- Get alerts before expiry to reduce wastage.
+- View customer trends for smarter restocking.
+
+---
+
+## ✨ Features
+
+### 📱 Mobile App Features
+- **QR/Barcode Scanner**: Scan food products instantly.
+- **Health Profile Setup**: Add allergies, conditions, and diet.
+- **Harmful Ingredient Detection**: Smart alerts based on profile.
+- **Expiry Tracking**: Alerts for both consumers and sellers.
+- **Recipe Generator**: Suggests meals using scanned items.
+
+### 📊 Shopkeeper Dashboard *(Web coming soon!)*
+- Scan at billing → auto-saves product to customer profile.
+- Track most/least selling items.
+- Get insights into inventory and expiry trends.
+
+---
+
+## 🧠 Tech Stack
+
+| Frontend                | Backend                | Tools/Infra           |
+|-------------------------|------------------------|------------------------|
+| React Native (Expo)     | Node.js + Express.js   | Render (Backend Hosting) |
+| NativeWind (Tailwind)   | REST API Architecture  | Supabase (User/Auth DB) |
+| Expo Camera             | dotenv, cors           | Open Food Facts API    |
+
+---
+
+## 🧪 Methodologies Used
+
+1. **Barcode-Based Ingredient Parsing** (OCR / API).
+2. **Health Profile Matching** (Rule-based + future ML).
+3. **Expiry Notification System** (Time-triggered alerts).
+4. **Collaborative Filtering for Recommendations**.
+5. **Recipe Suggestions** via NLP-based ingredient matching.
+6. **Cloud-Backed Storage** using Supabase.
+
+---
+
+## 🖼️ Screenshots
+
+| Home Page          | Scanner             | Scan Result           | Profile Setup         |
+|--------------------|---------------------|------------------------|------------------------|
+| ![](assets/home.png) | ![](assets/scan.png) | ![](assets/scan-result.png) | ![](assets/profile.png) |
+
+---
+
+## 📂 Folder Structure
+
+SafeBite/
+├── app/
+│ ├── _layout.jsx
+│ ├── index.jsx
+│ ├── global.css
+│ ├── (auth)/login.jsx
+│ ├── (auth)/signup.jsx
+│ ├── (auth)/onboarding.jsx
+│ ├── (tabs)/home.jsx
+│ ├── (tabs)/profile.jsx
+│ ├── product/[id].tsx
+│ ├── scan/index.tsx
+├── backend/
+│ ├── server.js
+│ ├── routes/
+├── assets/
+├── constants/
+├── components/
+├── types/
+
+---
+
+## 📦 How to Run Locally
+
+### 1. Clone the repo
 ```bash
-npm run reset-project
+git clone https://github.com/Ajay-Krishna00/SafeBite
+cd SafeBite
 ```
+### 2. Setup Mobile Frontend (Expo)
+```bash
+npm install
+npx expo start
+```
+### 3. Setup Backend API
+```bash
+cd backend
+npm install
+node server.js
+```
+Or deploy your backend to Render and replace the API URL.
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
+## 🎯 Target Users
+- Individuals with allergies or chronic conditions
 
-To learn more about developing your project with Expo, look at the following resources:
+- Parents shopping for children
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- Health-conscious users
 
-## Join the community
+- Shopkeepers wanting smarter stock control
 
-Join our community of developers creating universal apps.
+## 🌍 Market Opportunity
+- 🚨 Rising food-related illnesses and allergies
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- 📱 Growing demand for food transparency
+
+- 🔁 Need for sustainable grocery usage
+
+- 👨‍👩‍👦 Families wanting healthier options
+
+- 🛒 Local sellers improving digital literacy
+
+## 🔒 Security & Privacy
+
+- Secure user profile and health data
+
+- Authentication powered by Supabase
+
+## 📈 Scalability Roadmap
+- 🛍️ Shopkeeper Web Portal
+
+- 🧠 AI-powered ingredient classification
+
+- 🗣️ Text-to-speech & Accessibility Support
+
+- 🥦 Nutrition-specific alerts (e.g., sugar count)
+
+- 📅 Grocery planning assistant
+
+- 🔒 Fully GDPR-compliant data handling
+
+---
+
+## 👥 Team - Code Blooded
+- Ajay Krishna D
+- Abhay Murali M
+- Thaariq Hassan R
+
+---
+
+## 🧾 License
+MIT License — free for personal and educational use.
+
+---
+
+## 💬 Final Note
+
+> “**Health isn’t just about what you eat — it’s about knowing what you’re about to eat. SafeBite gives you that power with a single scan.**”
+
+If you like this project, ⭐️ star it and share it with health-conscious friends!

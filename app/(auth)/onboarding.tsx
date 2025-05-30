@@ -74,7 +74,7 @@ const QuestionComp = ({
             )}
           </View>
         ) : question.relatedTo === "ageGroup" ? (
-          <View className="flex-row gap-2">
+          <View className="flex-row gap-2 flex-wrap">
             {singleAnswer("0-12", selectedAgeGroup, setSelectedAgeGroup)}
             {singleAnswer("13-19", selectedAgeGroup, setSelectedAgeGroup)}
             {singleAnswer("20-35", selectedAgeGroup, setSelectedAgeGroup)}
@@ -161,12 +161,12 @@ const onboarding = () => {
           <QuestionComp key={index} question={question} />
         ))}
         <TouchableOpacity
-          className="flex-1 p-2 rounded-md bg-green-700 align-center py-2 mt-5 h-10 justify-center"
+          className="flex-1 p-2 rounded-md bg-green-700 align-center py-2 h-14 justify-center mt-10"
           onPress={() => {
-            router.push("../(tabs)");
+            router.push("../home");
           }}
         >
-          <Text className="text-white text-xl font-bold text-center w-full py-2">
+          <Text className="text-white text-xl font-bold text-center w-full py-2 z-10">
             Save
           </Text>
         </TouchableOpacity>
