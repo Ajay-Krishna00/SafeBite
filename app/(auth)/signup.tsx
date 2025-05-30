@@ -1,3 +1,4 @@
+import { signUp } from "@/lib/auth";
 import { Link, useRouter } from "expo-router";
 import React, { useState } from "react";
 import { Switch, Text, TouchableOpacity, View } from "react-native";
@@ -17,7 +18,8 @@ const signup = () => {
 
   const router = useRouter();
   async function handleSignup() {
-    setError("")
+    setError("");
+    setLoading(true);
     if (
       !username ||
       (isShopkeeper &&
@@ -25,6 +27,22 @@ const signup = () => {
     ) {
       setError("Please fill in all details");
     }
+    const { error } = await signUp(
+      username,
+      email,
+      password,
+      isShopkeeper,
+      businessAddress,
+      businessName,
+      businessType,
+      phone
+    );
+    if (error) {
+      setError(error.message);
+    } else {
+      router.replace("/login");
+    }
+    setLoading(false);
   }
 
   return (
@@ -34,9 +52,9 @@ const signup = () => {
           Sign Up
         </SText>
         <InputWithLabel name="Username" value={username} change={setUsername} />
-        <InputWithLabel name="Email" value={email} change={setPassword} />
+        <InputWithLabel name="Email" value={email} change={setEmail} />
         <InputWithLabel name="Password" value={password} change={setPassword} />
-        <View className="flex-row gap-2">
+        <View className="flex-row gap-2 justify-center">
           <SText>Customer</SText>
           <Switch
             value={isShopkeeper}
@@ -90,33 +108,4 @@ const signup = () => {
     </View>
   );
 };
-
-const ShopkeeperExt = () => {
-  const [businessName, setBusinessName] = useState("");
-  const [businessType, setBusinessType] = useState("");
-  const [businessAddress, setBusinessAddress] = useState("");
-  const [phone, setPhone] = useState("");
-
-  return (
-    <>
-      <InputWithLabel
-        name="Business Name"
-        value={businessName}
-        change={setBusinessName}
-      />
-      <InputWithLabel
-        name="Business Type"
-        value={businessType}
-        change={setBusinessType}
-      />
-      <InputWithLabel
-        name="Business Address"
-        value={businessAddress}
-        change={setBusinessAddress}
-      />
-      <InputWithLabel name="Contact Number" value={phone} change={setPhone} />
-    </>
-  );
-};
-
 export default signup;

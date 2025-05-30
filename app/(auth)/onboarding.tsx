@@ -151,6 +151,9 @@ const selectElement = (
 };
 
 const onboarding = () => {
+  function handleSubmit() {
+    router.replace('/home')
+  }
   return (
     <View className="flex-1 flex-col bg-gray-200 p-3 pt-5 gap-5">
       <ScrollView
@@ -162,9 +165,7 @@ const onboarding = () => {
         ))}
         <TouchableOpacity
           className="flex-1 p-2 rounded-md bg-green-700 align-center py-2 h-14 justify-center mt-10"
-          onPress={() => {
-            router.push("../home");
-          }}
+          onPress={handleSubmit}
         >
           <Text className="text-white text-xl font-bold text-center w-full py-2 z-10">
             Save

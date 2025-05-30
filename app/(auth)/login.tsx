@@ -1,3 +1,4 @@
+import { signin } from "@/lib/auth";
 import { Link, useRouter } from "expo-router";
 import { useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
@@ -39,7 +40,15 @@ function login() {
   const router = useRouter();
 
   async function handleLogin() {
-    
+    setError("")
+    setLoading(true)
+    const {error} = await signin(email,password)
+    if (error) {
+      setError(error.message)
+    } else {
+      router.replace('/onboarding')
+    }
+    setLoading(false)
   }
     
   return (
