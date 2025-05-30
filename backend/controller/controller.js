@@ -1,6 +1,5 @@
 // controllers/aiController.js
 import Groq from "groq-sdk";
-import { ChatCompletionMessageParam } from "groq-sdk/resources/chat/completions.mjs";
 
 export const askAI = async (productData, userProfile) => {
   const groq = new Groq({ apiKey: process.env.GROQ_API_KEY || "" });
