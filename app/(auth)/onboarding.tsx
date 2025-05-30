@@ -74,7 +74,7 @@ const QuestionComp = ({
             )}
           </View>
         ) : question.relatedTo === "ageGroup" ? (
-          <View className="flex-row gap-2">
+          <View className="flex-row gap-2 flex-wrap">
             {singleAnswer("0-12", selectedAgeGroup, setSelectedAgeGroup)}
             {singleAnswer("13-19", selectedAgeGroup, setSelectedAgeGroup)}
             {singleAnswer("20-35", selectedAgeGroup, setSelectedAgeGroup)}
@@ -151,6 +151,9 @@ const selectElement = (
 };
 
 const onboarding = () => {
+  function handleSubmit() {
+    router.replace("/home");
+  }
   return (
     <View className="flex-1 flex-col bg-gray-200 p-3 pt-5 gap-5">
       <ScrollView
@@ -161,12 +164,10 @@ const onboarding = () => {
           <QuestionComp key={index} question={question} />
         ))}
         <TouchableOpacity
-          className="flex-1 p-2 rounded-md bg-green-700 align-center py-2 mt-5 h-10 justify-center"
-          onPress={() => {
-            router.push("../(tabs)");
-          }}
+          className="flex-1 p-2 rounded-md bg-green-700 align-center py-2 h-14 justify-center mt-10"
+          onPress={handleSubmit}
         >
-          <Text className="text-white text-xl font-bold text-center w-full py-2">
+          <Text className="text-white text-xl font-bold text-center w-full py-2 z-10">
             Save
           </Text>
         </TouchableOpacity>

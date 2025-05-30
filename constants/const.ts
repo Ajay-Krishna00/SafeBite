@@ -72,9 +72,4 @@ export const questions: { text: string; type: string; relatedTo: string }[] = [
     type: "select",
     relatedTo: "ageGroup",
   },
-  {
-    text: "Which age group do you belong to?",
-    type: "select",
-    relatedTo: "ageGroup",
-  },
 ];

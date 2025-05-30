@@ -1,3 +1,4 @@
+import { signin } from "@/lib/auth";
 import { Link, useRouter } from "expo-router";
 import { useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
@@ -33,12 +34,22 @@ export const InputWithLabel = ({
 function login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const router = useRouter();
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     router.push("/onboarding");
-  //   }, 10);
-  // }, []);
+
+  async function handleLogin() {
+    setError("");
+    setLoading(true);
+    const { error } = await signin(email, password);
+    if (error) {
+      setError(error.message);
+    } else {
+      router.replace("/onboarding");
+    }
+    setLoading(false);
+  }
 
   return (
     <View className="flex-1 justify-center items-center bg-gray-200">
@@ -46,9 +57,11 @@ function login() {
         <SText className="text-5xl font-semibold m-6 text-center">Login</SText>
         <InputWithLabel name="Email" value={email} change={setEmail} />
         <InputWithLabel name="Password" value={password} change={setPassword} />
+        {error && <SText className="text-red-600">{error}</SText>}
         <TouchableOpacity
-          onPress={() => {}}
+          onPress={handleLogin}
           className="bg-green-700 text-center h-8 justify-center p-1 rounded-md"
+          disabled={loading}
         >
           <Text className="text-white text-lg font-bold text-center">
             Log in
