@@ -1,10 +1,11 @@
 import { useRouter } from "expo-router";
 import { useEffect } from "react";
-import { Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
+import sb from "@/assets/images/sb.png";
 
 export default function Index() {
   const router = useRouter();
-  const isLoggedIn = true;
+  const isLoggedIn = false;
   useEffect(() => {
     const timer = setTimeout(() => {
       if (isLoggedIn) {
@@ -12,7 +13,7 @@ export default function Index() {
       } else {
         router.replace("/(auth)/login");
       }
-    }, 2000);
+    }, 4000);
 
     return () => clearTimeout(timer);
   }, [isLoggedIn]);
@@ -24,13 +25,7 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Text className="text-blue-500">Welcome to{"\n"}</Text>
-      <Text
-        className="text-blue-500"
-        style={{ fontWeight: "bold", fontSize: 44 }}
-      >
-        SafeBite
-      </Text>
+      <Image source={sb} className="w-[300px] h-[230px]" resizeMode="contain" />
     </View>
   );
 }

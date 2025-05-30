@@ -23,7 +23,9 @@ const ProductSummary = () => {
           setImgUri(
             data.product?.selected_images?.front?.display?.fr ??
               data.product?.selected_images?.front?.display?.en ??
-              data.product?.selected_images?.front?.display?.default,
+              (data.product?.selected_images?.front?.display?.default ||
+                data.product?.image_url ||
+                "https://placehold.co/360x260?text=No+Image&font=roboto"),
           );
         } else {
           setNotFound(true);
@@ -57,39 +59,57 @@ const ProductSummary = () => {
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{ paddingBottom: 80 }}
           >
-                <Image
-                  source={{ uri: imgUri || "https://via.placeholder.com/300" }}
-                  className="mb-4"
-                  alt="Product Image"
-                  key={imgUri}
-                  style={{ width: 300, height: 260 }}
-                  resizeMode="contain"
-                />
-            <Text className="text-2xl">Name: {productData.product_name}</Text>
-            <Text>Brand: {productData.brands}</Text>
-            <Text>Ingredients: {productData.ingredients_text}</Text>
-            <Text>
-              Allergens: {productData.allergens_tags?.join(", ") || "None listed"}
+            <Image
+              source={{
+                uri:
+                  imgUri ||
+                  "https://placehold.co/360x260?text=No+Image&font=roboto",
+              }}
+              className="mb-4"
+              alt="Product Image"
+              key={imgUri}
+              style={{ width: 360, height: 260 }}
+              resizeMode="contain"
+            />
+            <Text className="text-2xl mb-1">
+              Name: {productData.product_name}
             </Text>
-            <Text>
-              Additives: {productData.additives_tags?.join(", ") || "None listed"}
+            <Text className="text-lg mb-1">Brand: {productData.brands}</Text>
+            <Text className="text-lg mb-1">
+              Ingredients: {productData.ingredients_text}
             </Text>
-            <Text>Nutrition Grade: {productData.nutrition_grades}</Text>
-            <Text>Eco Score: {productData.ecoscore_grade}</Text>
-            <Text>
+            <Text className="text-lg mb-1">
+              Allergens:{" "}
+              {productData.allergens_tags?.join(", ") || "None listed"}
+            </Text>
+            <Text className="text-lg mb-1">
+              Additives:{" "}
+              {productData.additives_tags?.join(", ") || "None listed"}
+            </Text>
+            <Text className="text-lg mb-1">
+              Nutrition Grade: {productData.nutrition_grades}
+            </Text>
+            <Text className="text-lg mb-1">
+              Eco Score: {productData.ecoscore_grade}
+            </Text>
+            <Text className="text-lg mb-1">
               Vegetarian:{" "}
               {productData.ingredients_analysis_tags?.includes("en:vegetarian")
                 ? "Yes"
                 : "No"}
             </Text>
-            <Text>
+            <Text className="text-lg mb-1">
               Vegan:{" "}
               {productData.ingredients_analysis_tags?.includes("en:vegan")
                 ? "Yes"
                 : "No"}
             </Text>
-            <Text>Quantity: {productData.quantity}</Text>
-            <Text>Serving Size: {productData.serving_size}</Text>
+            <Text className="text-lg mb-1">
+              Quantity: {productData.quantity}
+            </Text>
+            <Text className="text-lg mb-1">
+              Serving Size: {productData.serving_size}
+            </Text>
           </ScrollView>
         </View>
       )}
