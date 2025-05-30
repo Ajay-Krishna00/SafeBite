@@ -53,6 +53,18 @@ export default function RootLayout() {
             animationDuration: 500,
           }}
         />
+        <Stack.Screen
+          name="shop_interface"
+          options={{
+            headerTitle: "Shop Interface",
+            headerStyle: {
+              backgroundColor: "#004d00",
+            },
+            headerTintColor: "#ffffff",
+            animation: "fade",
+            animationDuration: 500,
+          }}
+        />
       </Stack>
     </>
   );

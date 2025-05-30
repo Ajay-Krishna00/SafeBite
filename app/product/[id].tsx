@@ -239,10 +239,7 @@ const ProductSummary = () => {
               <Text className="text-gray-700">
                 {summaryLoading ? (
                   <View>
-                    <ActivityIndicator
-                      size="large"
-                      color="black"
-                    />
+                    <ActivityIndicator size="large" color="black" />
                   </View>
                 ) : (
                   summaryData || "No summary available for this product."

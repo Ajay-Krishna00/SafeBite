@@ -28,8 +28,6 @@ SafeBite solves this dual-sided problem by providing:
 - ⚠️ Smart Warnings for Harmful Substances.Automatically detects and highlights ingredients that may be harmful or incompatible with the user's health profile.
 - 👤 User Profiles with Health Preferences.Users can save their conditions (e.g., diabetes, gluten intolerance, allergies), enabling fully personalized health checks.
 
-
-
 ### 🔹 For Shopkeepers:
 
 - Track product expiry using barcodes.
@@ -71,16 +69,16 @@ SafeBite solves this dual-sided problem by providing:
 1. **Barcode-Based Ingredient Parsing** (OCR / API).
 2. **Health Profile Matching** (Rule-based + future ML).
 3. **Expiry Notification System** (Time-triggered alerts).
-4. **Collaborative Filtering** for Recommendations_
+4. **Collaborative Filtering** for Recommendations\_
 5. **Cloud-Backed Storage** using Supabase.
 
 ---
 
 ## 🖼️ Screenshots
 
-| Home Page            | Scan Result 1      | Scan Result 2      | Profile Setup           |
-| -------------------- | ------------------ | ------------------ | ----------------------- |
-| ![](assets/home.jpg) | ![](assets/p2.png) | ![](assets/p1.png) | ![](assets/profile.png) |
+| Home Page                    | Scan Result 1              | Scan Result 2              | Profile Setup               |
+| ---------------------------- | -------------------------- | -------------------------- | --------------------------- |
+| ![](/assets/images/home.jpg) | ![](/assets/images/p2.jpg) | ![](/assets/images/p1.jpg) | ![](/assets/images/lay.jpg) |
 
 ---
 
