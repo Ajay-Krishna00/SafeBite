@@ -236,15 +236,15 @@ const ProductSummary = () => {
               <Text className="text-lg font-semibold text-gray-800 mb-2">
                 AI Summary
               </Text>
-              <Text className="text-gray-700">
                 {summaryLoading ? (
                   <View>
-                    <ActivityIndicator size="large" color="black" />
+                    <ActivityIndicator size="large" color="#15803d" />
                   </View>
                 ) : (
-                  summaryData || "No summary available for this product."
-                )}
+                  <Text className="text-gray-700">
+                  {summaryData || "No summary available for this product."}
               </Text>
+                )}
             </View>
             <TouchableOpacity
               className=" bg-green-600 p-3 rounded-lg mb-20 mt-4"

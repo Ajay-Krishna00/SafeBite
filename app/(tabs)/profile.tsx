@@ -1,7 +1,7 @@
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "expo-router";
 import React, { useEffect } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Button, Title } from "react-native-paper";
 
 const Styles = StyleSheet.create({
@@ -23,8 +23,10 @@ const profile = () => {
   const [shop, setShop] = React.useState<any>(null);
   const [cust, setCust] = React.useState<any>(null);
   const [users, setUsers] = React.useState<any>(null);
+  const [loading, setLoading] = React.useState<boolean>(true);
   useEffect(() => {
     const fetchD = async () => {
+      setLoading(true);
       const { data: user } = await supabase.auth.getUser();
       const { data: shop } = await supabase
         .from("Shopkeepers")
@@ -45,9 +47,10 @@ const profile = () => {
       setShop(shop);
       setCust(cust);
       setUsers(users);
+      setLoading(false);
     };
     fetchD();
-  });
+  },[]);
 
   const isShopkeeper = users?.isShopkeeper;
   const allergies = cust?.allergies;
@@ -70,14 +73,20 @@ const profile = () => {
     ));
 
   return (
-    <View
+    <>
+      {loading ?
+        <View className="flex-1 justify-center items-center">
+          <ActivityIndicator size="large" color="#15803d" />
+        </View>
+      :
+        <View
       style={{
         flex: 1,
         alignItems: "flex-start",
       }}
       className="px-10 py-5 bg-white gap-3"
     >
-      <Text className="font-extrabold mt-10 text-3xl underline">Profile</Text>
+      <Text className="font-extrabold mt-10 text-3xl underline">My Account</Text>
       <Title className="text-center font-bold mt-2">{users?.username}</Title>
 
       <Text className="text-center font-bold">{user?.user?.email}</Text>
@@ -111,7 +120,7 @@ const profile = () => {
           <Text className="text-red-500">Yes</Text>
         ) : (
           <Text className="text-red-500">No Medication</Text>
-        )}
+        )}
       </View>
 
       {isShopkeeper && (
@@ -120,9 +129,9 @@ const profile = () => {
             flex: 1,
             alignItems: "flex-start",
           }}
-          className="px-10 pt-5 gap-3"
+          className="gap-3 "
         >
-          <Title className="text-center font-bold">Shop Details</Title>
+          <Title className="text-center font-bold text-lg">Shop Details</Title>
           <Text className="text-center font-bold">
             Shop Name: {shop?.businessName}
           </Text>
@@ -132,18 +141,21 @@ const profile = () => {
           <Text className="text-center font-bold">
             Shop Contact: {shop?.businessType}
           </Text>
-          <Button
-            mode="contained"
+          <TouchableOpacity
             onPress={goToShop}
-            className="bg-green-500 rounded-lg"
+            className="bg-yellow-300 rounded-lg"
           >
-            Go to Shop
-          </Button>
+            <Text className="text-gray-600 font-bold text-xl px-5 py-2">
+              Go to Shop Interface
+            </Text>
+          </TouchableOpacity>
 
           <TouchableOpacity
-            className="bg-red-500 rounded-lg ml-1"
+            className="bg-red-500 rounded-lg ml-1 mt-5"
             onPress={async () => {
               await supabase.auth.signOut();
+              
+            router.push("/login");
             }}
           >
             <Text className="text-white font-bold text-xl px-5 py-2">
@@ -154,15 +166,17 @@ const profile = () => {
       )}
       {!isShopkeeper && (
         <TouchableOpacity
-          className="bg-red-500 rounded-lg"
+          className="bg-red-500 rounded-lg mt-5"
           onPress={async () => {
             await supabase.auth.signOut();
+            router.push("/login");
           }}
         >
           <Text className="text-white font-bold text-xl px-5 py-2">Logout</Text>
         </TouchableOpacity>
       )}
-    </View>
+      </View>}
+      </>
   );
 };
 

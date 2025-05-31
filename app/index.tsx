@@ -10,7 +10,7 @@ export default function Index() {
   useEffect(() => {
     const checkUser = async () => {
       const { data: user } = await supabase.auth.getUser();
-      const isLoggedIn = user;
+      const isLoggedIn = false||user;
       const timer = setTimeout(() => {
         if (isLoggedIn) {
           router.replace("/home");
