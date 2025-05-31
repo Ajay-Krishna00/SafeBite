@@ -19,8 +19,12 @@
         "foregroundImage": "./assets/images/logos.png",
         "backgroundColor": "#ffffff"
       },
-      "permissions": ["CAMERA"],
-      "edgeToEdgeEnabled": true
+      "permissions": [
+        "CAMERA",
+        "android.permission.CAMERA"
+      ],
+      "edgeToEdgeEnabled": true,
+      "package": "com.ajaykd.safeBite"
     },
     "web": {
       "bundler": "metro",
@@ -37,12 +41,19 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ],
-      "expo-barcode-scanner"
+      ]
     ],
     "experiments": {
       "typedRoutes": true
     },
-    "assetBundlePatterns": ["**/*"]
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "cdcbe9db-330b-4f53-ad53-9eadab97935c"
+      }
+    }
   }
 }

@@ -110,8 +110,7 @@ const profile = () => {
         {takesMedication ? (
           <Text className="text-red-500">Yes</Text>
         ) : (
-          <Text className="text-red-500">No Medication</Text>
-        )}
+          <Text className="text-red-500">No Medication</Text>)}
       </View>
 
       {isShopkeeper && (

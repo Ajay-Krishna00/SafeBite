@@ -18,7 +18,6 @@
     "@react-navigation/native": "^7.1.6",
     "@supabase/supabase-js": "2.38.3",
     "expo": "~53.0.9",
-    "expo-barcode-scanner": "^13.0.1",
     "expo-blur": "~14.1.4",
     "expo-camera": "~16.1.6",
     "expo-constants": "~17.1.6",
