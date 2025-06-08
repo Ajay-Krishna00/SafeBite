@@ -12,15 +12,16 @@ const Recommendation = () => {
       setRecommendation(result);
       setLoading(false);
     };
+    fetchRecomm();
   }, []);
   return (
     <View>
       {loading ? (
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator color={"#004d00"}>Loading...</ActivityIndicator>
+          <ActivityIndicator color={"#004d00"}/>
         </View>
       ) : (
-        <Text></Text>
+          <Text>{recommendation}</Text>
       )}
     </View>
   );
