@@ -1,4 +1,5 @@
 const Groq = require("groq-sdk");
+const axios = require("axios");
 
 const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY || "",
@@ -13,7 +14,12 @@ User profile:
 Product data:
 ${JSON.stringify(productData, null, 2)}
 
-Summarize if this product is safe or risky. Be brief but clear. maximum of 70 words. Don't show your thinking process, just the conclusion and if necessary your suggestions and advices. DO NOT include any markdown formatting or code blocks in your response. 
+
+Summarize if this product is safe or risky for the user. Be brief but clear, and limit your response to a maximum of 70 words. Do not explain your reasoning. Only give the conclusion and, if necessary, a short suggestion or advice. Do NOT include markdown, code blocks, or bullet points.
+
+As a second paragraph, write a general overview of the product that a 10-year-old can understand, using no more than 40 words.
+
+You may only use italic or bold styling that is compatible with React Native <Text> components. No other formatting is allowed.
 `;
 
   const result = await groq.chat.completions.create({
@@ -33,4 +39,37 @@ Summarize if this product is safe or risky. Be brief but clear. maximum of 70 wo
   return result.choices[0].message.content;
 };
 
-module.exports = { askAI };
+const consultAi = async (userProfile, filteredProductList) => {
+  const prompt = `
+  The user has the following constraints:
+- Allergies: ${userProfile.allergies.join(", ")}
+- Medications: ${userProfile.conditions.join(", ")}
+- Dietary Restrictions: ${userProfile.dietary.join(", ")}
+
+Here is a list of food product data fetched from OpenFoodFacts. Each item is an object with a product ID and its metadata.
+
+${JSON.stringify(filteredProductList)}
+
+Select and return only the IDs of 100-200 products that are perfectly compatible with all the user's health details. Products should also be considered healthy. If fewer than 10 healthy products exist, return only perfectly compatible ones, even if not healthy.
+
+Output: A plain JSON array of product IDs, e.g.:
+["1234567890123", "9876543210987", ...]
+  `;
+
+  const result = await groq.chat.completions.create({
+    model: "llama-3.1-8b-instant",
+    messages: [
+      {
+        role: "system",
+        content: "You are a health AI assistant for selecting food products.",
+      },
+      {
+        role: "user",
+        content: prompt,
+      },
+    ],
+  });
+  return JSON.parse(result.choices[0].message.content);
+};
+
+module.exports = { askAI, consultAi };

@@ -1,7 +1,6 @@
 import { Tabs } from "expo-router";
-import { Image, Text, View } from "react-native";
-import home from "@/assets/icons/home.png";
-import profile from "@/assets/icons/person.png";
+import { Text, View } from "react-native";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const TabIcon = ({
   focused,
@@ -10,17 +9,35 @@ const TabIcon = ({
 }: {
   focused: boolean;
   title: string;
-  icon: any;
+  icon: keyof typeof Ionicons.glyphMap;
 }) => (
   <>
     {focused ? (
       <View className="flex-row items-center justify-center w-full min-w-[120px] min-h-16 mt-5 rounded-full overflow-hidden">
-        <Image source={icon} className="size-5" tintColor="#ffffff" />
-        <Text className="text-lg text-white ml-2 font-semibold">{title}</Text>
+        <Ionicons
+          name={
+            focused
+              ? icon
+              : (`${icon}-outline` as keyof typeof Ionicons.glyphMap)
+          }
+          size={21}
+          color={"#fde047"}
+        />
+        <Text className="text-lg text-[#fdeb84] ml-2 font-semibold">
+          {title}
+        </Text>
       </View>
     ) : (
       <View className="items-center justify-center w-full min-w-[120px] min-h-16 mt-5 rounded-full overflow-hidden">
-        <Image source={icon} className="size-5" tintColor="#ffffff" />
+        <Ionicons
+          name={
+            focused
+              ? icon
+              : (`${icon}-outline` as keyof typeof Ionicons.glyphMap)
+          }
+          size={20}
+          color={"#ffffff"}
+        />
       </View>
     )}
   </>
@@ -52,7 +69,7 @@ const _layout = () => {
         options={{
           title: "Home",
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={home} title="Home" />
+            <TabIcon focused={focused} icon={"home"} title="Home" />
           ),
           headerShown: false,
           animation: "fade",
@@ -61,11 +78,14 @@ const _layout = () => {
       <Tabs.Screen
         name="profile"
         options={{
-          title: "Profile",
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={profile} title="Profile" />
+            <TabIcon focused={focused} icon={"person"} title="My Account" />
           ),
-          headerShown: false,
+          headerTitle: "My Account",
+          headerStyle: {
+            backgroundColor: "#004d00",
+          },
+          headerTintColor: "#ffffff",
           animation: "fade",
         }}
       />

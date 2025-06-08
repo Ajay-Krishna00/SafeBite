@@ -6,9 +6,10 @@ import {
 } from "@/constants/const";
 import { setOnboardingDetails } from "@/lib/actions";
 import { router } from "expo-router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SText } from "./login";
+import { supabase } from "@/lib/supabase";
 
 const lists = (
   Arr: string[],
@@ -147,6 +148,20 @@ const onboarding = () => {
     }
     router.replace("/home");
   }
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data: user } = await supabase.auth.getUser();
+      const { data } = await supabase
+        .from("Customerdetails")
+        .select()
+        .eq("id", user?.user?.id);
+
+      if (data?.length !== 0) {
+        router.replace("/home");
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <View className="flex-1 flex-col bg-gray-200 p-3 pt-5 gap-5">
       <ScrollView

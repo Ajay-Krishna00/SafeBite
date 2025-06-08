@@ -9,6 +9,8 @@ import Animated, {
   withRepeat,
   withTiming,
 } from "react-native-reanimated";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import Recommendation from "@/components/recomentation";
 
 const index = () => {
   const router = useRouter();
@@ -20,7 +22,7 @@ const index = () => {
   });
   useEffect(() => {
     offset.value = withRepeat(
-      withTiming(1.2, { duration: 1000 }), // scale to 2 over 1s
+      withTiming(1.1, { duration: 1000 }), // animate to 1.2 scale
       -1, // repeat forever
       true, // reverse on every cycle
     );
@@ -39,7 +41,7 @@ const index = () => {
         }}
       >
         <TouchableOpacity
-          className="w-[280px] h-[230px]"
+          className="w-[270px] h-[280px] rounded-lg flex items-center justify-center"
           onPress={() => router.push("/scan")}
         >
           <Image
@@ -50,43 +52,28 @@ const index = () => {
           <Animated.View
             style={[
               {
-                // position: 'absolute',
-                // top: 0,
-                // left: 0,
-                // right: 0,
-                // bottom: 0,
                 justifyContent: "center",
                 alignItems: "center",
               },
               animatedStyle,
             ]}
+            className="bg-yellow-300 rounded-full px-6 py-2 mt-5 flex flex-row"
           >
-            <View className="bg-yellow-300 rounded-full px-6 py-2">
-              <Text
-                className="text-gray-600"
-                style={{ fontSize: 22, fontWeight: "bold" }}
-              >
-                Tap to scan
-              </Text>
-            </View>
+            <Text
+              className="text-gray-900 mr-1"
+              style={{ fontSize: 22, fontWeight: "bold" }}
+            >
+              Tap to scan
+            </Text>
+            <Ionicons name="scan-circle-outline" size={30} />
           </Animated.View>
         </TouchableOpacity>
       </LinearGradient>
-      <View className="flex-1 items-center justify-center">
-        <Text className="text-3xl font-bold text-gray-800 mb-4">
-          Welcome to SafeBite
+      <View className="flex-1 w-full h-full mb-10 px-5">
+        <Text className="text-2xl font-bold text-gray-900 mb-4">
+          Recommended Products for You
         </Text>
-        <Text className="text-lg text-gray-600">
-          Scan QR codes to get started!
-        </Text>
-        <TouchableOpacity
-          className="mt-6 px-6 py-3 bg-green-500 rounded-full"
-          onPress={() => router.push("/scan")}
-        >
-          <Text className="text-white text-lg font-semibold">
-            Start Scanning
-          </Text>
-        </TouchableOpacity>
+        <Recommendation />
       </View>
     </>
   );

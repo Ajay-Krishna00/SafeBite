@@ -1,8 +1,14 @@
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "expo-router";
 import React, { useEffect } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { Button, Title } from "react-native-paper";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const Styles = StyleSheet.create({
   container: {
@@ -23,8 +29,10 @@ const profile = () => {
   const [shop, setShop] = React.useState<any>(null);
   const [cust, setCust] = React.useState<any>(null);
   const [users, setUsers] = React.useState<any>(null);
+  const [loading, setLoading] = React.useState<boolean>(true);
   useEffect(() => {
     const fetchD = async () => {
+      setLoading(true);
       const { data: user } = await supabase.auth.getUser();
       const { data: shop } = await supabase
         .from("Shopkeepers")
@@ -45,9 +53,10 @@ const profile = () => {
       setShop(shop);
       setCust(cust);
       setUsers(users);
+      setLoading(false);
     };
     fetchD();
-  });
+  }, []);
 
   const isShopkeeper = users?.isShopkeeper;
   const allergies = cust?.allergies;
@@ -70,98 +79,141 @@ const profile = () => {
     ));
 
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: "flex-start",
-      }}
-      className="px-10 py-5 bg-white gap-3"
-    >
-      <Text className="font-extrabold mt-10 text-3xl underline">Profile</Text>
-      <Title className="text-center font-bold mt-2">{users?.username}</Title>
-
-      <Text className="text-center font-bold">{user?.user?.email}</Text>
-      <Text className="text-center font-bold">Allergies</Text>
-      <View className="flex-row flex-wrap justify-center">
-        {allergies ? (
-          list(allergies)
-        ) : (
-          <Text className="text-red-500">No Allergies</Text>
-        )}
-      </View>
-      <Text className="text-center font-bold">Medical Conditions</Text>
-      <View className="flex-row flex-wrap justify-center">
-        {conditions ? (
-          list(conditions)
-        ) : (
-          <Text className="text-red-500">No Medical Conditions</Text>
-        )}
-      </View>
-      <Text className="text-center font-bold">Dietary Restrictions</Text>
-      <View className="flex-row flex-wrap justify-center">
-        {diet ? (
-          list(diet)
-        ) : (
-          <Text className="text-red-500">No Dietary Restrictions</Text>
-        )}
-      </View>
-      <Text className="text-center font-bold">Takes Medication</Text>
-      <View className="flex-row flex-wrap justify-center">
-        {takesMedication ? (
-          <Text className="text-red-500">Yes</Text>
-        ) : (
-          <Text className="text-red-500">No Medication</Text>)}
-      </View>
-
-      {isShopkeeper && (
+    <>
+      {loading ? (
+        <View className="flex-1 justify-center items-center">
+          <ActivityIndicator size="large" color="#15803d" />
+        </View>
+      ) : (
         <View
           style={{
             flex: 1,
             alignItems: "flex-start",
           }}
-          className="px-10 pt-5 gap-3"
+          className="px-5 py-5 bg-white gap-3"
         >
-          <Title className="text-center font-bold">Shop Details</Title>
-          <Text className="text-center font-bold">
-            Shop Name: {shop?.businessName}
-          </Text>
-          <Text className="text-center font-bold">
-            Shop Address: {shop?.businessAddress}
-          </Text>
-          <Text className="text-center font-bold">
-            Shop Contact: {shop?.businessType}
-          </Text>
-          <Button
-            mode="contained"
-            onPress={goToShop}
-            className="bg-green-500 rounded-lg"
-          >
-            Go to Shop
-          </Button>
-
-          <TouchableOpacity
-            className="bg-red-500 rounded-lg ml-1"
-            onPress={async () => {
-              await supabase.auth.signOut();
-            }}
-          >
-            <Text className="text-white font-bold text-xl px-5 py-2">
-              Logout
+          <View className="flex flex-row items-center gap-1 justify-center mt-2">
+            <Ionicons
+              name={"person-circle-outline"}
+              size={22}
+              color={"#007b00"}
+            />
+            <Text className="text-center font-bold text-xl ">
+              {users?.username}
             </Text>
-          </TouchableOpacity>
+          </View>
+          <View className="flex flex-row items-center gap-1 justify-center">
+            <Ionicons name={"mail-outline"} size={22} color={"#007b00"} />
+            <Text className="text-center font-bold">{user?.user?.email}</Text>
+          </View>
+
+          <Text className="text-center font-bold underline">Allergies</Text>
+          <View className="flex-row flex-wrap justify-center">
+            {allergies ? (
+              list(allergies)
+            ) : (
+              <Text className="text-red-500">No Allergies</Text>
+            )}
+          </View>
+          <Text className="text-center font-bold underline">
+            Medical Conditions
+          </Text>
+          <View className="flex-row flex-wrap justify-center">
+            {conditions ? (
+              list(conditions)
+            ) : (
+              <Text className="text-red-500">No Medical Conditions</Text>
+            )}
+          </View>
+          <Text className="text-center font-bold underline">
+            Dietary Restrictions
+          </Text>
+          <View className="flex-row flex-wrap justify-center">
+            {diet ? (
+              list(diet)
+            ) : (
+              <Text className="text-red-500">No Dietary Restrictions</Text>
+            )}
+          </View>
+          <Text className="text-center font-bold underline">
+            Takes Medication
+          </Text>
+          <View className="flex-row flex-wrap justify-center">
+            {takesMedication ? (
+              <Text className="text-red-500">Yes</Text>
+            ) : (
+              <Text className="text-red-500">No Medication</Text>
+            )}
+          </View>
+
+          {isShopkeeper && (
+            <View
+              style={{
+                flex: 1,
+                alignItems: "flex-start",
+              }}
+              className="gap-3 "
+            >
+              <Text className="text-center font-bold text-3xl underline">
+                Shop Details
+              </Text>
+              <Text className="text-center font-bold">
+                Shop Name:{"  "}
+                <Text className="text-center font-bold text-lg">
+                  {shop?.businessName}
+                </Text>
+              </Text>
+              <Text className="text-center font-bold">
+                Shop Address:{"  "}
+                <Text className="text-center font-bold text-lg">
+                  {shop?.businessAddress}
+                </Text>
+              </Text>
+              <Text className="text-center font-bold">
+                Shop Type:{"  "}
+                <Text className="text-center font-bold text-lg">
+                  {shop?.businessType}
+                </Text>
+              </Text>
+              <TouchableOpacity
+                onPress={goToShop}
+                className="bg-yellow-300 rounded-lg"
+              >
+                <Text className="text-gray-600 font-bold text-xl px-5 py-2">
+                  Go to Shop Interface
+                </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                className="bg-red-500 rounded-lg ml-1 mt-5"
+                onPress={async () => {
+                  await supabase.auth.signOut();
+
+                  router.push("/login");
+                }}
+              >
+                <Text className="text-white font-bold text-xl px-5 py-2">
+                  Logout
+                </Text>
+              </TouchableOpacity>
+            </View>
+          )}
+          {!isShopkeeper && (
+            <TouchableOpacity
+              className="bg-red-500 rounded-lg mt-5"
+              onPress={async () => {
+                await supabase.auth.signOut();
+                router.push("/login");
+              }}
+            >
+              <Text className="text-white font-bold text-xl px-5 py-2">
+                Logout
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
       )}
-      {!isShopkeeper && (
-        <TouchableOpacity
-          className="bg-red-500 rounded-lg"
-          onPress={async () => {
-            await supabase.auth.signOut();
-          }}
-        >
-          <Text className="text-white font-bold text-xl px-5 py-2">Logout</Text>
-        </TouchableOpacity>
-      )}
-    </View>
+    </>
   );
 };
 

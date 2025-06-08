@@ -6,18 +6,18 @@ import { supabase } from "@/lib/supabase";
 
 export default function Index() {
   const router = useRouter();
-  const isLoggedIn = true;
   useEffect(() => {
     const checkUser = async () => {
       const { data: user } = await supabase.auth.getUser();
-      const isLoggedIn = user;
+      const isLoggedIn = user ? user : false;
       const timer = setTimeout(() => {
         if (isLoggedIn) {
           router.replace("/home");
         } else {
           router.replace("/login");
+          alert("Please login to continue");
         }
-      }, 4000);
+      }, 3000);
       return () => clearTimeout(timer);
     };
     checkUser();
