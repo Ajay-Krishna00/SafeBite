@@ -63,7 +63,8 @@ Do not include any other text, explanations, or formatting. Only return the JSON
     messages: [
       {
         role: "system",
-        content: "You are a health AI assistant for selecting food products.",
+        content:
+          "You are a strict JSON formatter. Only output a valid JSON array as the result. Never add headings, text, or formatting.",
       },
       {
         role: "user",
@@ -71,7 +72,14 @@ Do not include any other text, explanations, or formatting. Only return the JSON
       },
     ],
   });
-  return JSON.parse(result.choices[0].message.content);
+  const response = result.choices[0].message.content;
+
+  // Extract JSON array using regex
+  const match = response.match(/\[.*?\]/s); // non-greedy match across lines
+  if (!match) throw new Error("AI response did not contain a JSON array");
+
+  const productIds = JSON.parse(match[0]);
+  return productIds;
 };
 
 module.exports = { askAI, consultAi };

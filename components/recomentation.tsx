@@ -18,10 +18,14 @@ const Recommendation = () => {
     <View>
       {loading ? (
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator color={"#004d00"}/>
+          <ActivityIndicator color={"#004d00"} />
         </View>
       ) : (
-          <Text>{recommendation}</Text>
+        <Text>
+          {typeof recommendation === "string"
+            ? recommendation
+            : "Something went wrong"}
+        </Text>
       )}
     </View>
   );

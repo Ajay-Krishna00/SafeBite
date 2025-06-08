@@ -21,10 +21,7 @@
         "foregroundImage": "./assets/images/logos.png",
         "backgroundColor": "#ffffff"
       },
-      "permissions": [
-        "CAMERA",
-        "android.permission.CAMERA"
-      ],
+      "permissions": ["CAMERA", "android.permission.CAMERA"],
       "edgeToEdgeEnabled": true,
       "package": "com.ajaykd.safeBite"
     },
