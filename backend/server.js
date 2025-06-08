@@ -17,4 +17,6 @@ app.get("/", (req, res) => {
 app.use("/api/summary", summaryRoute);
 app.use("/api/recommendation", recommendationRoute);
 
-app.listen(port, () => console.log(`Server is running on port ${port}`));
+app.listen(port, () =>
+  console.log(`Server is running on server : http://192.168.162.52:${port}`),
+);

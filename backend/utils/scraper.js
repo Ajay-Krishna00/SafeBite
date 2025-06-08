@@ -1,5 +1,5 @@
 const fs = require("fs");
-
+// const franc = require("franc");
 const BASE_URL = "https://world.openfoodfacts.org/cgi/search.pl";
 const PAGE_SIZE = 100;
 const TOTAL_PRODUCTS = 5000;
@@ -42,15 +42,19 @@ async function fetchProducts(page) {
       if (!hasText) {
         continue;
       }
+      // if (
+      //   franc(product.product_name) !== "eng" ||
+      //   franc(product.ingredients_text) !== "eng"
+      // ) {
+      //   continue;
+      // }
       allProducts.push({
         id: product.code || "",
         product_name: product.product_name || "",
         ingredients_text: product.ingredients_text || "",
-        allergens_tags: product.allergens_tags || [],
-        labels_tags: product.labels_tags || [],
+        // labels_tags: product.labels_tags || [],
         nutriments: product.nutriments || {},
         nutriscore_grade: product.nutriscore_grade || "",
-        categories_tags: product.categories_tags || [],
       });
     }
     page++;

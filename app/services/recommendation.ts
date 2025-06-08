@@ -14,6 +14,7 @@ const handleRecommendation = async () => {
 
     const res = await fetch(
       "https://safebite-28tg.onrender.com/api/recommendation",
+      // "http://192.168.162.52:3000/api/recommendation",
       {
         method: "POST",
         headers: {

@@ -17,7 +17,7 @@ export default function Index() {
           router.replace("/login");
           alert("Please login to continue");
         }
-      }, 3000);
+      }, 2000);
       return () => clearTimeout(timer);
     };
     checkUser();
