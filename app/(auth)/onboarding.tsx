@@ -155,7 +155,7 @@ const onboarding = () => {
         .from("Customerdetails")
         .select()
         .eq("id", user?.user?.id);
-      
+
       if (data?.length !== 0) {
         router.replace("/home");
       }

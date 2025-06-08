@@ -1,7 +1,13 @@
 import { signUp } from "@/lib/auth";
 import { Link, useRouter } from "expo-router";
 import React, { useState } from "react";
-import { ActivityIndicator, Switch, Text, TouchableOpacity, View } from "react-native";
+import {
+  ActivityIndicator,
+  Switch,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { InputWithLabel, SText } from "./login";
 
 const signup = () => {
@@ -26,8 +32,8 @@ const signup = () => {
         (!businessAddress || !businessName || !businessType || !phone))
     ) {
       setError("Please fill in all details");
-      setLoading(false)
-      return
+      setLoading(false);
+      return;
     }
     const { error } = await signUp(
       username,
@@ -37,7 +43,7 @@ const signup = () => {
       businessAddress,
       businessName,
       businessType,
-      phone
+      phone,
     );
     if (error) {
       setError(error.message);
@@ -97,9 +103,11 @@ const signup = () => {
           className="bg-green-700 text-center h-8 justify-center p-1 rounded-md"
           disabled={loading}
         >
-          {!loading && <Text className="text-white text-lg font-bold text-center">
-            Sign Up
-          </Text>}
+          {!loading && (
+            <Text className="text-white text-lg font-bold text-center">
+              Sign Up
+            </Text>
+          )}
           {loading && <ActivityIndicator size={20} color={"white"} />}
         </TouchableOpacity>
         <SText>

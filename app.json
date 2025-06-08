@@ -11,17 +11,17 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "NSCameraUsageDescription": "This app uses the camera to scan barcodes."
-      }
+        "NSCameraUsageDescription": "This app uses the camera to scan barcodes.",
+        "ITSAppUsesNonExemptEncryption": false
+      },
+      "bundleIdentifier": "com.ajaykd.safeBite"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/logos.png",
         "backgroundColor": "#ffffff"
       },
-      "permissions": [
-        "CAMERA"
-      ],
+      "permissions": ["CAMERA"],
       "edgeToEdgeEnabled": true,
       "package": "com.ajaykd.safeBite"
     },
@@ -45,14 +45,13 @@
     "experiments": {
       "typedRoutes": true
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "extra": {
       "router": {},
       "eas": {
         "projectId": "cdcbe9db-330b-4f53-ad53-9eadab97935c"
       }
-    }
+    },
+    "owner": "ajaykd"
   }
 }
