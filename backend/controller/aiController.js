@@ -54,6 +54,8 @@ Select and return only the IDs of 100-200 products that are perfectly compatible
 
 Output: A plain JSON array of product IDs, e.g.:
 ["1234567890123", "9876543210987", ...]
+
+Do not include any other text, explanations, or formatting. Only return the JSON array of product IDs.No markdown, code blocks, or bullet points. No additional text is allowed.
   `;
 
   const result = await groq.chat.completions.create({

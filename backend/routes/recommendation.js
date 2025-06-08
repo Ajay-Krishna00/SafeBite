@@ -17,7 +17,6 @@ function handleFilter(products, userProfile) {
   return products.filter((product) => {
     const allergens = product.allergens_tags || [];
     const labels = product.labels_tags || [];
-    const nutriscore = product.nutriscore_grade || "";
 
     // ✅ 1. Filter allergens (e.g., en:gluten)
     const hasAllergens = allergies.some((allergy) =>
@@ -29,19 +28,19 @@ function handleFilter(products, userProfile) {
       (diet) => !labels.includes(`en:${diet.toLowerCase()}`),
     );
 
-    // ✅ 3. Filter based on medical conditions (this is tricky — basic version)
-    // Example: avoid sugar if diabetic
-    const conditionFails = conditions.some((condition) => {
-      if (condition.toLowerCase() === "diabetes") {
-        return product.nutriments?.sugars_100g > 5;
-      }
-      if (condition.toLowerCase() === "hypertension") {
-        return product.nutriments?.salt_100g > 0.3;
-      }
-      return false;
-    });
+    // // ✅ 3. Filter based on medical conditions (this is tricky — basic version)
+    // // Example: avoid sugar if diabetic
+    // const conditionFails = conditions.some((condition) => {
+    //   if (condition.toLowerCase() === "diabetes") {
+    //     return product.nutriments?.sugars_100g > 5;
+    //   }
+    //   if (condition.toLowerCase() === "hypertension") {
+    //     return product.nutriments?.salt_100g > 0.3;
+    //   }
+    //   return false;
+    // });
 
-    return !hasAllergens && !isDietRestricted && !conditionFails;
+    return !hasAllergens && !isDietRestricted;
   });
 }
 
