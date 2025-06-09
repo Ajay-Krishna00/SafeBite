@@ -148,7 +148,6 @@ router.post("/", async (req, res) => {
       .single();
     if (error) {
       console.error("Error fetching existing recommendations:", error);
-      return res.status(500).json({ error: "Failed to fetch recommendations" });
     }
     if (existing && existing.product_ids) {
       console.log(
