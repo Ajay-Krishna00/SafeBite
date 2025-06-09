@@ -131,6 +131,7 @@ function handleFilter(products, userProfile) {
 }
 
 router.post("/", async (req, res) => {
+  console.log("Received recommendation request:", req.body);
   try {
     const { userProfile } = req.body;
     if (!userProfile) {
@@ -145,6 +146,10 @@ router.post("/", async (req, res) => {
       .select("product_ids")
       .eq("profile_hash", profileHash)
       .single();
+    if (error) {
+      console.error("Error fetching existing recommendations:", error);
+      return res.status(500).json({ error: "Failed to fetch recommendations" });
+    }
     if (existing && existing.product_ids) {
       console.log(
         "✅ Returning cached product IDs from Supabase:",
