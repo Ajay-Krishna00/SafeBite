@@ -19,7 +19,7 @@ Summarize if this product is safe or risky for the user. Be brief but clear, and
 
 As a second paragraph, write a general overview of the product that a 15-year-old can understand, using no more than 50 words.should have a heading "General Overview" in bold. 
 
-You may only use italic or bold styling that is compatible with React Native <Text> components. No other formatting is allowed.if using bold use <Text style={{ fontWeight: 'bold' }}>heading</Text> and for italic use <Text style={{ fontStyle: 'italic' }}>body</Text>.
+You may only use italic or bold styling that is compatible with React Native <Text> components. No other formatting is allowed.
 `;
 
   const result = await groq.chat.completions.create({

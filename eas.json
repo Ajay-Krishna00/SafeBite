@@ -1,0 +1,27 @@
+{
+  "cli": {
+    "version": ">= 16.9.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "env": {
+        "SUPABASE_URL": "https://modsyvhxrvjuprbygqse.supabase.co",
+        "SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1vZHN5dmh4cnZqdXByYnlncXNlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg1ODc3MzQsImV4cCI6MjA2NDE2MzczNH0.OUglIU3PWClDUom5MvnA4EwtvVuIyP4p9-3IjIUq-ts"
+      },
+      "android": {
+        "buildType": "apk"
+      }
+    },
+    "production": {
+      "autoIncrement": true
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}
