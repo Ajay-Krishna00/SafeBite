@@ -190,7 +190,7 @@ router.post("/", async (req, res) => {
     console.log(`✅ AI returned ${finalProductIds.length} unique product IDs`);
     await supabase
       .from("recommended_products")
-      .insert([{ profile_hash: profileHash, product_ids: productIds }]);
+      .insert([{ profile_hash: profileHash, product_ids: finalProductIds }]);
     res.json({ finalProductIds });
   } catch (error) {
     console.error("Error consulting AI:", error);
