@@ -17,9 +17,9 @@ ${JSON.stringify(productData, null, 2)}
 
 Summarize if this product is safe or risky for the user. Be brief but clear, and limit your response to a maximum of 70 words. Do not explain your reasoning. Only give the conclusion and, if necessary, a short suggestion or advice. Do NOT include markdown, code blocks, or bullet points.should have a heading "Overview from your data" in bold. 
 
-As a second paragraph, write a general overview of the product that a 15-year-old can understand, using no more than 40 words.should have a heading "General Overview" in bold. 
+As a second paragraph, write a general overview of the product that a 15-year-old can understand, using no more than 50 words.should have a heading "General Overview" in bold. 
 
-You may only use italic or bold styling that is compatible with React Native <Text> components. No other formatting is allowed.
+You may only use italic or bold styling that is compatible with React Native <Text> components. No other formatting is allowed.if using bold use <Text style={{ fontWeight: 'bold' }}>heading</Text> and for italic use <Text style={{ fontStyle: 'italic' }}>body</Text>.
 `;
 
   const result = await groq.chat.completions.create({

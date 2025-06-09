@@ -2,6 +2,8 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useEffect } from "react";
 import qr from "@/assets/images/qr.jpg";
+import qr1 from "@/assets/images/logo2.png";
+import qr2 from "@/assets/images/logo3.png";
 import { useRouter } from "expo-router";
 import Animated, {
   useSharedValue,
@@ -44,11 +46,6 @@ const index = () => {
           className="w-[270px] h-[280px] rounded-lg flex items-center justify-center"
           onPress={() => router.push("/scan")}
         >
-          <Image
-            source={qr}
-            className="w-[280px] h-[230px]"
-            resizeMode="contain"
-          />
           <Animated.View
             style={[
               {
@@ -57,15 +54,21 @@ const index = () => {
               },
               animatedStyle,
             ]}
-            className="bg-yellow-300 rounded-full px-6 py-2 mt-5 flex flex-row"
+            // className="flex flex-row"
           >
-            <Text
+            <Image
+              source={qr2}
+              className="w-[280px] h-[294px] rounded-3xl"
+              // resizeMethod="resize"
+              resizeMode="cover"
+            />
+            {/* <Text
               className="text-gray-900 mr-1"
               style={{ fontSize: 22, fontWeight: "bold" }}
             >
               Tap to scan
-            </Text>
-            <Ionicons name="scan-circle-outline" size={30} />
+            </Text> 
+            <Ionicons name="scan-circle-outline" size={30} />*/}
           </Animated.View>
         </TouchableOpacity>
       </LinearGradient>

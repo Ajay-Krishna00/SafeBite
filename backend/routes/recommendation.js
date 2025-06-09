@@ -154,7 +154,7 @@ router.post("/", async (req, res) => {
         "✅ Returning cached product IDs from Supabase:",
         existing.product_ids,
       );
-      return res.json({ productIds: existing.product_ids });
+      return res.json({ finalProductIds: existing.product_ids });
     }
     const filteredProductList = await handleFilter(products, userProfile);
     console.log(
