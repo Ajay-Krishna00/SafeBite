@@ -10,8 +10,8 @@
     },
     "preview": {
       "env": {
-        "SUPABASE_URL": "https://modsyvhxrvjuprbygqse.supabase.co",
-        "SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1vZHN5dmh4cnZqdXByYnlncXNlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg1ODc3MzQsImV4cCI6MjA2NDE2MzczNH0.OUglIU3PWClDUom5MvnA4EwtvVuIyP4p9-3IjIUq-ts"
+        "SUPABASE_URL": "$SUPABASE_URL",
+        "SUPABASE_ANON_KEY": "$SUPABASE_ANON_KEY"
       },
       "android": {
         "buildType": "apk"
