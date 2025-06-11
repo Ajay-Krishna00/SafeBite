@@ -27,6 +27,8 @@ SafeBite solves this dual-sided problem by providing:
 - 🧠 AI-Powered Ingredient Analysis.SafeBite uses AI to analyze ingredients and generate a personalized summary based on the user's allergies, medical conditions, and dietary preferences.
 - ⚠️ Smart Warnings for Harmful Substances.Automatically detects and highlights ingredients that may be harmful or incompatible with the user's health profile.
 - 👤 User Profiles with Health Preferences.Users can save their conditions (e.g., diabetes, gluten intolerance, allergies), enabling fully personalized health checks.
+- 🧾 AI Recommendations.
+Suggests alternative or healthier food products based on the user's allergens, medical conditions, and dietary preferences.
 
 ### 🔹 For Shopkeepers:
 
@@ -44,7 +46,8 @@ SafeBite solves this dual-sided problem by providing:
 - **Health Profile Setup**: Add allergies, conditions, and diet.
 - **Harmful Ingredient Detection**: Smart alerts based on profile.
 - **Expiry Tracking**: Alerts for both consumers and sellers.
-- **uses AI** to analyze ingredients and generate a personalized summary based on the user's allergies, medical conditions, and dietary preferences.
+- **AI Summary**: Generates a product overview using AI, combining public health insights with user-specific analysis.
+- **Smart Recommendations**: Displays a personalized list of safer, healthier food alternatives based on user profile.
 
 ### 📊 Shopkeeper Dashboard _(Web coming soon!)_
 
@@ -69,16 +72,18 @@ SafeBite solves this dual-sided problem by providing:
 1. **Barcode-Based Ingredient Parsing** (OCR / API).
 2. **Health Profile Matching** (Rule-based + future ML).
 3. **Expiry Notification System** (Time-triggered alerts).
-4. **Collaborative Filtering** for Recommendations\_
+4. **Collaborative Filtering** for Recommendations.
 5. **Cloud-Backed Storage** using Supabase.
+6. **Personalized AI Summarization** of scanned product information.
+7. **Allergen-Based Product Recommendations** using sorted health profiles + AI logic.
 
 ---
 
 ## 🖼️ Screenshots
 
-| Home Page                    | Scan Result 1              | Scan Result 2              | Profile Setup               |
+| Home Page                    | Scan Result 1              | Profile 2                  | Shop-Interface       |
 | ---------------------------- | -------------------------- | -------------------------- | --------------------------- |
-| ![](/assets/images/home.jpg) | ![](/assets/images/p2.jpg) | ![](/assets/images/p1.jpg) | ![](/assets/images/lay.jpg) |
+| ![](/assets/images/p4.jpg) | ![](/assets/images/p2.jpg) | ![](/assets/images/p5.jpg) | ![](/assets/images/p7.jpg) |
 
 ---
 
