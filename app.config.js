@@ -1,4 +1,4 @@
-import 'dotenv/config';
+import "dotenv/config";
 
 export default ({ config }) => ({
   ...config,
@@ -15,22 +15,22 @@ export default ({ config }) => ({
     bundleIdentifier: "com.ajaykd021.safeBite",
     infoPlist: {
       NSCameraUsageDescription: "This app uses the camera to scan barcodes.",
-      ITSAppUsesNonExemptEncryption: false
-    }
+      ITSAppUsesNonExemptEncryption: false,
+    },
   },
   android: {
     adaptiveIcon: {
       foregroundImage: "./assets/images/logos.png",
-      backgroundColor: "#ffffff"
+      backgroundColor: "#ffffff",
     },
     edgeToEdgeEnabled: true,
     permissions: ["CAMERA"],
-    package: "com.ajaykd021.safeBite"
+    package: "com.ajaykd021.safeBite",
   },
   web: {
     bundler: "metro",
     output: "static",
-    favicon: "./assets/images/logos.png"
+    favicon: "./assets/images/logos.png",
   },
   plugins: [
     "expo-router",
@@ -40,19 +40,19 @@ export default ({ config }) => ({
         image: "./assets/images/logos.png",
         imageWidth: 200,
         resizeMode: "contain",
-        backgroundColor: "#ffffff"
-      }
-    ]
+        backgroundColor: "#ffffff",
+      },
+    ],
   ],
   experiments: {
-    typedRoutes: true
+    typedRoutes: true,
   },
   assetBundlePatterns: ["**/*"],
   extra: {
     SUPABASE_URL: process.env.SUPABASE_URL,
     SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY,
     eas: {
-      projectId: "e566b827-4513-46eb-ba27-e31db8cc5ddd"
-    }
-  }
+      projectId: "e566b827-4513-46eb-ba27-e31db8cc5ddd",
+    },
+  },
 });

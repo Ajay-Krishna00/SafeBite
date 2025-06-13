@@ -16,14 +16,18 @@ function handleFilter(products, userProfile) {
   const { allergies = [], conditions = [], dietary = [] } = userProfile;
 
   return products.filter((product) => {
-    const allergens = Array.isArray(product.allergens_tags) ? product.allergens_tags : [];
-    const labels = Array.isArray(product.labels_tags) ? product.labels_tags : [];
+    const allergens = Array.isArray(product.allergens_tags)
+      ? product.allergens_tags
+      : [];
+    const labels = Array.isArray(product.labels_tags)
+      ? product.labels_tags
+      : [];
 
     // ✅ 1. Filter allergens (e.g., en:gluten)
     const hasAllergens = allergies.some((allergy) => {
       if (allergy.toLowerCase().trim() === "none") return false;
       return allergens.includes(`en:${allergy.toLowerCase().trim()}`);
-  });
+    });
 
     // ✅ 2. Filter dietary tags (e.g., en:vegan, en:vegetarian)
     const isDietRestricted = dietary.some((diet) => {
@@ -80,7 +84,8 @@ function handleFilter(products, userProfile) {
           product.ingredients_text?.toLowerCase().trim().includes("onion") ||
           product.ingredients_text?.toLowerCase().trim().includes("garlic") ||
           product.ingredients_text
-            ?.toLowerCase().trim()
+            ?.toLowerCase()
+            .trim()
             .includes("artificial sweeteners")
         );
       }
@@ -118,14 +123,23 @@ function handleFilter(products, userProfile) {
 
       if (condition === "food sensitivities (general)") {
         return (
-          product.ingredients_text?.toLowerCase().trim().includes("artificial") ||
-          product.ingredients_text?.toLowerCase().trim().includes("preservatives") ||
+          product.ingredients_text
+            ?.toLowerCase()
+            .trim()
+            .includes("artificial") ||
+          product.ingredients_text
+            ?.toLowerCase()
+            .trim()
+            .includes("preservatives") ||
           product.ingredients_text?.toLowerCase().trim().includes("coloring")
         );
       }
 
       return false;
     });
+    if (hasAllergens) console.log("Filtered due to allergens");
+    if (isDietRestricted) console.log("Filtered due to dietary");
+    if (conditionFails) console.log("Filtered due to condition");
 
     return !hasAllergens && !isDietRestricted && !conditionFails;
   });
@@ -161,7 +175,14 @@ router.post("/", async (req, res) => {
     console.log(
       `✅ Filtered product list based on user profile: ${filteredProductList.length} products found`,
     );
-
+    if (filteredProductList.length === 0) {
+      console.warn(
+        "⚠️ No products matched after filtering. Returning first 5 unfiltered.",
+      );
+      return res.json({
+        finalProductIds: products.slice(0, 5).map((p) => p.id),
+      });
+    }
     function sleep(ms) {
       return new Promise((resolve) => setTimeout(resolve, ms));
     }

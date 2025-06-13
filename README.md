@@ -28,7 +28,7 @@ SafeBite solves this dual-sided problem by providing:
 - ⚠️ Smart Warnings for Harmful Substances.Automatically detects and highlights ingredients that may be harmful or incompatible with the user's health profile.
 - 👤 User Profiles with Health Preferences.Users can save their conditions (e.g., diabetes, gluten intolerance, allergies), enabling fully personalized health checks.
 - 🧾 AI Recommendations.
-Suggests alternative or healthier food products based on the user's allergens, medical conditions, and dietary preferences.
+  Suggests alternative or healthier food products based on the user's allergens, medical conditions, and dietary preferences.
 
 ### 🔹 For Shopkeepers:
 
@@ -81,8 +81,8 @@ Suggests alternative or healthier food products based on the user's allergens, m
 
 ## 🖼️ Screenshots
 
-| Home Page                    | Scan Result 1              | Profile                  | Shop-Interface       |
-| ---------------------------- | -------------------------- | -------------------------- |-------------------------- |
+| Home Page                  | Scan Result 1              | Profile                    | Shop-Interface             |
+| -------------------------- | -------------------------- | -------------------------- | -------------------------- |
 | ![](/assets/images/p4.jpg) | ![](/assets/images/p2.jpg) | ![](/assets/images/p5.jpg) | ![](/assets/images/p7.jpg) |
 
 ---
