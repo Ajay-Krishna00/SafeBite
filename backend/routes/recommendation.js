@@ -150,7 +150,7 @@ router.post("/", async (req, res) => {
     if (error) {
       console.error("Error fetching existing recommendations:", error);
     }
-    if (existing.product_ids) {
+    if (existing && existing.product_ids) {
       console.log(
         "✅ Returning cached product IDs from Supabase:",
         existing.product_ids,
