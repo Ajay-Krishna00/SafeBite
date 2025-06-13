@@ -81,8 +81,8 @@ Suggests alternative or healthier food products based on the user's allergens, m
 
 ## 🖼️ Screenshots
 
-| Home Page                    | Scan Result 1              | Profile 2                  | Shop-Interface       |
-| ---------------------------- | -------------------------- | -------------------------- | --------------------------- |
+| Home Page                    | Scan Result 1              | Profile                  | Shop-Interface       |
+| ---------------------------- | -------------------------- | -------------------------- |-------------------------- |
 | ![](/assets/images/p4.jpg) | ![](/assets/images/p2.jpg) | ![](/assets/images/p5.jpg) | ![](/assets/images/p7.jpg) |
 
 ---

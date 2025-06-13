@@ -79,9 +79,9 @@ const _layout = () => {
         name="profile"
         options={{
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={"person"} title="My Account" />
+            <TabIcon focused={focused} icon={"person"} title="Profile" />
           ),
-          headerTitle: "My Account",
+          headerTitle: "Profile",
           headerStyle: {
             backgroundColor: "#004d00",
           },

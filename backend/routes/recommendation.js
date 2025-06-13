@@ -16,24 +16,25 @@ function handleFilter(products, userProfile) {
   const { allergies = [], conditions = [], dietary = [] } = userProfile;
 
   return products.filter((product) => {
-    const allergens = product.allergens_tags || [];
-    const labels = product.labels_tags || [];
+    const allergens = Array.isArray(product.allergens_tags) ? product.allergens_tags : [];
+    const labels = Array.isArray(product.labels_tags) ? product.labels_tags : [];
 
     // ✅ 1. Filter allergens (e.g., en:gluten)
-    const hasAllergens = allergies.some((allergy) =>
-      allergens.includes(`en:${allergy.toLowerCase()}`),
-    );
+    const hasAllergens = allergies.some((allergy) => {
+      if (allergy.toLowerCase().trim() === "none") return false;
+      return allergens.includes(`en:${allergy.toLowerCase().trim()}`);
+  });
 
     // ✅ 2. Filter dietary tags (e.g., en:vegan, en:vegetarian)
     const isDietRestricted = dietary.some((diet) => {
-      if (diet.toLowerCase() === "none") return false;
-      return !labels.includes(`en:${diet.toLowerCase()}`);
+      if (diet.toLowerCase().trim() === "none") return false;
+      return !labels.includes(`en:${diet.toLowerCase().trim()}`);
     });
 
     // ✅ 3. Filter based on medical conditions (this is tricky — basic version)
     // Example: avoid sugar if diabetic
     const conditionFails = conditions.some((condition) => {
-      condition = condition.toLowerCase();
+      condition = condition.toLowerCase().trim();
 
       if (condition === "diabetes") {
         return (
@@ -58,37 +59,37 @@ function handleFilter(products, userProfile) {
 
       if (condition === "celiac disease") {
         return (
-          product.ingredients_text?.toLowerCase().includes("gluten") ||
-          product.ingredients_text?.toLowerCase().includes("wheat") ||
-          product.ingredients_text?.toLowerCase().includes("barley") ||
-          product.ingredients_text?.toLowerCase().includes("rye")
+          product.ingredients_text?.toLowerCase().trim().includes("gluten") ||
+          product.ingredients_text?.toLowerCase().trim().includes("wheat") ||
+          product.ingredients_text?.toLowerCase().trim().includes("barley") ||
+          product.ingredients_text?.toLowerCase().trim().includes("rye")
         );
       }
 
       if (condition === "lactose intolerance") {
         return (
-          product.ingredients_text?.toLowerCase().includes("milk") ||
-          product.ingredients_text?.toLowerCase().includes("lactose") ||
-          product.ingredients_text?.toLowerCase().includes("cheese") ||
-          product.ingredients_text?.toLowerCase().includes("butter")
+          product.ingredients_text?.toLowerCase().trim().includes("milk") ||
+          product.ingredients_text?.toLowerCase().trim().includes("lactose") ||
+          product.ingredients_text?.toLowerCase().trim().includes("cheese") ||
+          product.ingredients_text?.toLowerCase().trim().includes("butter")
         );
       }
 
       if (condition === "irritable bowel syndrome (ibs)") {
         return (
-          product.ingredients_text?.toLowerCase().includes("onion") ||
-          product.ingredients_text?.toLowerCase().includes("garlic") ||
+          product.ingredients_text?.toLowerCase().trim().includes("onion") ||
+          product.ingredients_text?.toLowerCase().trim().includes("garlic") ||
           product.ingredients_text
-            ?.toLowerCase()
+            ?.toLowerCase().trim()
             .includes("artificial sweeteners")
         );
       }
 
       if (condition === "gout") {
         return (
-          product.ingredients_text?.toLowerCase().includes("red meat") ||
-          product.ingredients_text?.toLowerCase().includes("beer") ||
-          product.ingredients_text?.toLowerCase().includes("organ meat")
+          product.ingredients_text?.toLowerCase().trim().includes("red meat") ||
+          product.ingredients_text?.toLowerCase().trim().includes("beer") ||
+          product.ingredients_text?.toLowerCase().trim().includes("organ meat")
         );
       }
 
@@ -108,18 +109,18 @@ function handleFilter(products, userProfile) {
 
       if (condition === "thyroid disorder") {
         return (
-          product.ingredients_text?.toLowerCase().includes("soy") ||
-          product.ingredients_text?.toLowerCase().includes("broccoli") ||
-          product.ingredients_text?.toLowerCase().includes("cabbage") ||
-          product.ingredients_text?.toLowerCase().includes("kale")
+          product.ingredients_text?.toLowerCase().trim().includes("soy") ||
+          product.ingredients_text?.toLowerCase().trim().includes("broccoli") ||
+          product.ingredients_text?.toLowerCase().trim().includes("cabbage") ||
+          product.ingredients_text?.toLowerCase().trim().includes("kale")
         );
       }
 
       if (condition === "food sensitivities (general)") {
         return (
-          product.ingredients_text?.toLowerCase().includes("artificial") ||
-          product.ingredients_text?.toLowerCase().includes("preservatives") ||
-          product.ingredients_text?.toLowerCase().includes("coloring")
+          product.ingredients_text?.toLowerCase().trim().includes("artificial") ||
+          product.ingredients_text?.toLowerCase().trim().includes("preservatives") ||
+          product.ingredients_text?.toLowerCase().trim().includes("coloring")
         );
       }
 
@@ -149,7 +150,7 @@ router.post("/", async (req, res) => {
     if (error) {
       console.error("Error fetching existing recommendations:", error);
     }
-    if (existing && existing.product_ids) {
+    if (existing.product_ids) {
       console.log(
         "✅ Returning cached product IDs from Supabase:",
         existing.product_ids,
